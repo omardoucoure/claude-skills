@@ -1,0 +1,323 @@
+pattern: login
+description: Login, sign up, forgot password, verification, passcode, and biometric auth screens
+source: HaHo Design System — 8 login + 5 sign up + 6 flow states deeply analyzed (node trees + screenshots)
+figma_references:
+  # Each layout maps to a specific HaHo designer reference screen.
+  # Screenshot the ONE reference that matches your chosen layout — not all of them.
+
+  segmented_pills_form_dark_social:
+    reference: "[Log In] 1 — Segmented Pills + form card + dark 'Continue with:' social card"
+    nodeId: "85:55825"
+
+  segmented_tabs_form_dark_social:
+    reference: "[Log In] 2 — Segmented Nav Tabs + form card + dark social buttons"
+    nodeId: "85:55804"
+
+  centered_form_social_list:
+    reference: "[Log In] 3 — Centered 'Welcome back!' + inline form + 'Or...' + outlined social button list + footer signup"
+    nodeId: "85:55785"
+
+  social_first_form_below:
+    reference: "[Log In] 4 — Social buttons first + 'Or better yet...' card with form below"
+    nodeId: "85:55766"
+
+  segmented_pills_form_social_row:
+    reference: "[Log In] 5 — Segmented Pills + form card + 'Or better yet...' + social icon row + footer"
+    nodeId: "85:55745"
+
+  dark_overlapping_full_flow:
+    reference: "[Log In] 6 - Start — Dark bg, overlapping form card + dark social card + coral signup bar"
+    nodeId: "85:55721"
+  dark_overlapping_active:
+    reference: "[Log In] 6 - Active — Input focused with blue border"
+    nodeId: "85:55696"
+  dark_overlapping_error:
+    reference: "[Log In] 6 - Error — Validation error with red border + helper text"
+    nodeId: "85:55647"
+  dark_overlapping_forgot:
+    reference: "[Log In] 6 - Forgot password — Email input + send reset link"
+    nodeId: "85:55637"
+  dark_overlapping_verify:
+    reference: "[Log In] 6 - Verify — OTP code input"
+    nodeId: "85:55606"
+
+  layered_image_biometric:
+    reference: "[Log In] 7 — Layered Card image hero + dark fingerprint card + coral 'Login with Passcode?' bar"
+    nodeId: "85:55517"
+
+  layered_image_passcode:
+    reference: "[Log In] 8 — Layered Card image hero + dark passcode numpad card"
+    nodeId: "85:55481"
+
+  signup_segmented_3fields:
+    reference: "[Sign Up] 1 — Segmented Pills (Sign Up active) + 3 fields + terms checkbox + dark social footer"
+    nodeId: "85:55459"
+
+  signup_tabs_3fields:
+    reference: "[Sign Up] 2 — Segmented Nav Tabs + 3 fields + terms checkbox + dark social footer"
+    nodeId: "85:55438"
+
+  signup_social_first:
+    reference: "[Sign Up] 3 — Social buttons top + 'Or better yet...' card with 3 fields + terms"
+    nodeId: "85:55419"
+
+  signup_segmented_2fields:
+    reference: "[Sign Up] 4 — Segmented Pills + 2 fields + 'Or better yet...' social icon row"
+    nodeId: "85:55398"
+
+  signup_verify_flow:
+    reference: "[Sign Up] 5 - Start — Full sign up verification flow"
+    nodeId: "85:55376"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top:
+    options:
+      - segmented_pills: >
+          Segmented Picker (Style=Pills) with "Log In" / "Sign Up" tabs.
+          Inside a neutral card (surfaceNeutral2, r32, pad32).
+          Active tab = filled dark pill, inactive = text only.
+          Used in: L1, L5, S1, S4.
+      - segmented_tabs: >
+          Segmented Picker (Style=Navigation Tabs) with underline indicator.
+          Inside a neutral card (surfaceNeutral2, r32, pad32).
+          Active tab = dark underline, inactive = grey text.
+          Used in: L2, S2.
+      - centered_welcome: >
+          "Welcome back!" in caption (14px medium) + "Login" in h1 (40px medium).
+          Optional brand logo/icon on the right of the headline.
+          No card wrapper — sits directly on page bg.
+          Used in: L3.
+      - social_first: >
+          Welcome text (caption) centered + 2-3 dark social buttons (full-width, filledC).
+          Social auth presented as the PRIMARY action. Form comes after.
+          Used in: L4, S3.
+
+  form:
+    description: Email + password fields inside a card
+    structure: >
+      Neutral card (surfaceNeutral2, r32, pad32) containing:
+      - Welcome subtitle (caption 14px) — "Welcome back!" or "Create Your Account!"
+      - Headline (h1 40px or h4 24px) — "Login" or "Sign Up" + optional brand icon
+      - Input fields (Inputs-Filled, FILL width):
+        Login: email + password (2 fields)
+        Sign Up: name + email + password (3 fields)
+      - Helper row: Checkbox "Remember me" (login) or "I accept Terms & Conditions" (signup) + "Forgot Password?" text
+      - CTA button: DSButton (filledA, Big, isFullWidth) — "Let's Roll! →" or "Create Account →"
+    components:
+      - "Inputs-Filled — floating labels, icon right (envelope for email, eye for password)"
+      - "Checkbox — for 'Remember me' or 'Terms & Conditions'"
+      - "Button (Filled A, Big) — primary CTA with arrow icon right"
+      - "Segmented Picker — Login/SignUp toggle at top"
+    input_rules: >
+      CRITICAL: Input background MUST be surfaceNeutral0_5 (white/cream) when inside a surfaceNeutral2 card.
+      The default Inputs-Filled bg is surfaceNeutral2 which blends into the card.
+      Override the "Input" frame fill to surfaceNeutral0_5 (rgb 250,250,249).
+      ALL HaHo login screens follow this pattern.
+
+  social_auth:
+    description: Alternative login methods
+    options:
+      - dark_card_icons: >
+          Dark card (surfacePrimary100/120, r32, pad32) with "Continue with:" white text (h4 24px).
+          Row of 3 neutral buttons (DSButton Neutral, Big, icon-only): Google, Facebook, X.
+          Button bg = surfaceNeutral2 (contrasts with dark card).
+          Used in: L1, L2, L5, L6, S1, S2, S4.
+      - outlined_button_list: >
+          "Or..." text centered as separator.
+          3 full-width outlined buttons stacked with 12px gap:
+          "Continue with Google" + icon, "Continue with Facebook" + icon, "Continue with X" + icon.
+          Used in: L3.
+      - dark_full_width_buttons: >
+          2-3 full-width dark buttons (filledC, Big):
+          "Continue with Google" + icon, "Continue with Facebook" + icon.
+          Used as PRIMARY auth when social-first layout.
+          Used in: L4, S3.
+      - social_icon_row: >
+          "Or better yet..." text + row of 3 dark icon buttons (filledC, Big, icon-only).
+          Below form card, no wrapper card.
+          Used in: L5, S4.
+    icon_ids:
+      google: "85:34182"
+      facebook: "85:35004"
+      x: "85:35009"
+
+  footer:
+    description: Toggle between login and signup
+    options:
+      - text_link: >
+          "Don't have an account? **Sign Up**" (login) or "Already have an account? **Log In**" (signup).
+          Plain text + bold action text. Below the social section.
+          Used in: L3, L4, L5, S3, S4.
+      - coral_bar: >
+          Coral card (surfaceSecondary100, r32) with "Don't have an account?" + "Sign Up" bold.
+          Dark text on coral. Used in dark/overlapping layouts.
+          Used in: L6.
+      - inside_dark_card: >
+          "Already have an account? **Log In**" inside the dark social card.
+          White text. Used when social card is at the bottom.
+          Used in: S1, S2.
+
+  home_indicator:
+    description: "DEPRECATED — NEVER add. The iOS Home Indicator is a system-level element shown by the OS, not a page component. The HaHo designer included it for visual context only."
+    required: false
+    deprecated: true
+
+# ─── SPECIAL SCREEN TYPES ──────────────────────────────────────────────────────
+
+special_screens:
+  biometric_auth:
+    reference: "[Log In] 7"
+    nodeId: "85:55517"
+    structure: >
+      Layered Card (Direction=Bottom, Layers=2) with HD image hero (astronaut).
+      Dark card below with "Tap to verify identity" + fingerprint icon centered.
+      Coral bar at bottom "Login with Passcode?" + icon.
+    components: ["Layered Card", "DSCard (dark)", "DSButton (coral bar)"]
+
+  passcode_numpad:
+    reference: "[Log In] 8"
+    nodeId: "85:55481"
+    structure: >
+      Layered Card (Direction=Bottom, Layers=2) with HD image hero.
+      Dark card below with "Enter Passcode" + 6 dot indicators + 3×4 numpad grid.
+      Each numpad button: dark rounded rect (surfacePrimary120, r32) with number text.
+    components: ["Layered Card", "DSCard (dark)", "numpad grid (manual frames)"]
+
+  forgot_password_flow:
+    screens:
+      - enter_email: "Email input + 'Send Reset Link' CTA"
+      - verify_otp: "6-digit OTP code input (DSCodeInput)"
+      - new_password: "2 password fields + 'Save Password' CTA"
+    reference_base: "[Log In] 6"
+    nodeIds: ["85:55637", "85:55606", "85:55574"]
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  classic_segmented:
+    description: "Segmented picker + form card + dark social card — the standard HaHo login"
+    zones: [status_bar, form_card(with_segmented_picker), social_auth(dark_card_icons), home_indicator]
+    structure: >
+      Status Bar → Form Card (surfaceNeutral2, r32, pad32):
+        Segmented Picker (Pills or Tabs)
+        Welcome subtitle + Headline + brand icon
+        2-3 Input fields (surfaceNeutral0_5 bg for contrast)
+        Remember me checkbox + Forgot Password?
+        CTA button (filledA, Big)
+      → Dark Social Card (surfacePrimary100, r32, pad32):
+        "Continue with:" h4 white
+        3 neutral icon buttons (Google/Facebook/X)
+      → Home Indicator
+    best_for: Apps with both login and signup, standard auth flow
+    references: [L1, L2, L5, S1, S2, S4]
+
+  centered_with_social_list:
+    description: "Clean centered form + 'Or...' separator + outlined social buttons"
+    zones: [status_bar, form_card(centered_welcome), social_list(outlined_buttons), footer(text_link), home_indicator]
+    structure: >
+      Status Bar → Form Card (surfaceNeutral2, r32, pad32):
+        "Welcome back!" centered caption
+        "Login" centered h1
+        2 Input fields
+        Remember me + Forgot Password?
+        CTA button
+      → "Or..." separator text
+      → 3 Outlined social buttons (full-width, stacked)
+      → "Don't have an account? Sign Up" footer
+      → Home Indicator
+    best_for: Clean minimal design, single-purpose login
+    references: [L3]
+
+  social_first:
+    description: "Social buttons as primary action, email form secondary"
+    zones: [status_bar, welcome_text, social_buttons(dark_full_width), form_card(secondary), footer, home_indicator]
+    structure: >
+      Status Bar → Welcome text + subtitle centered
+      → 2-3 dark social buttons (filledC, Big, full-width)
+      → Form Card (surfaceNeutral2, r32, pad32):
+        "Or better yet..." + brand icon
+        2-3 Input fields
+        Checkbox + Forgot Password?
+        CTA button
+      → Footer ("Don't have an account?")
+      → Home Indicator
+    best_for: Apps where social login is preferred over email
+    references: [L4, S3]
+
+  dark_overlapping:
+    description: "Dark screen with overlapping form card — premium/cinematic feel"
+    zones: [dark_bg_card, form_card(overlapping), social_card(dark), coral_signup_bar, home_indicator]
+    structure: >
+      Dark full card (surfacePrimary120, r32) as hero:
+        Welcome + Login + brand icon (all white text)
+        2 Input fields (surfaceNeutral0_5 bg)
+        Checkbox + Forgot Password? (white text)
+        CTA button (filledA or neutral)
+      → Dark Social Card (surfacePrimary100, overlapping or separate):
+        "Continue with:" + 3 neutral buttons
+      → Coral signup bar (surfaceSecondary100):
+        "Don't have an account?" + "Sign Up" bold (dark text)
+      → Home Indicator
+    best_for: Premium apps, dark theme, cinematic experience
+    references: [L6]
+
+  biometric:
+    description: "Layered Card image hero + biometric/passcode auth card"
+    zones: [status_bar, layered_card_image, auth_card(dark), coral_bar(passcode), home_indicator]
+    structure: >
+      Status Bar → Layered Card (Direction=Bottom, Layers=2, HD image, surfaceNeutral2 bg + IMAGE fill)
+      → Dark card: fingerprint icon + "Tap to verify" OR numpad grid
+      → Coral bar: "Login with Passcode?" alternative
+      → Home Indicator
+    best_for: Apps with biometric auth, security-focused
+    references: [L7, L8]
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - INPUT BACKGROUND CONTRAST (CRITICAL): Inputs-Filled inside surfaceNeutral2 card MUST have bg overridden to surfaceNeutral0_5. Default bg blends into card.
+  - INPUT RIGHT ICONS (CRITICAL): Email = envelope/mail icon (85:33084). Password = eye/eye-closed icon (85:33088). NEVER leave inputs without contextual icons.
+  - SOCIAL BUTTONS USE BRAND ICONS: Google (85:34182), Facebook (85:35004), X (85:35009). NEVER use text labels "G"/"f"/"X".
+  - REMEMBER ME = REAL CHECKBOX: Use Checkbox component instance, not plain text.
+  - SEGMENTED PICKER AT TOP: Login/SignUp toggle uses Segmented Picker (Pills or Tabs) — not a text link at the bottom.
+  - PASSWORD SHOWS DOTS: isSecure=true, text shows "••••••••", eye toggle icon for visibility.
+  - CTA BUTTON: DSButton (filledA, Big, isFullWidth) with descriptive text + arrow-right-long icon. "Let's Roll! →" or "Create Account →".
+  - FORM CARD: surfaceNeutral2, r32, pad32. NEVER floating inputs on bare background.
+  - DARK SOCIAL CARD: surfacePrimary100/120, r32, pad32. "Continue with:" in h4 white. 3 neutral icon buttons.
+  - LAYERED CARD CONTENT MUST HAVE SOLID BG: When using Layered Card for image hero, Content card needs surfaceNeutral2 solid fill BEFORE image fill.
+  - Use real HaHo HD images for biometric/passcode screens — copy imageHash fills from reference nodes.
+  - Page background ALWAYS surfaceNeutral0_5 — NEVER change.
+  - Screen padding: padL=12, padR=12, padB=12, padT=0.
+  - counterAxisAlignItems = MIN on screen frame — NEVER CENTER.
+
+# ─── FIGMA IMPLEMENTATION ──────────────────────────────────────────────────────
+
+figma_implementation:
+  input_contrast_fix: >
+    After instantiating Inputs-Filled inside a surfaceNeutral2 card:
+    Find the "Input" child frame inside the Inputs-Filled instance.
+    Override its fills to: [{ type: 'SOLID', color: { r: 250/255, g: 250/255, b: 249/255 } }]
+    This makes the input white/cream against the grey card.
+
+  social_button_setup: >
+    For each social button (Google/Facebook/X):
+    1. Instantiate DSButton (Neutral, Big)
+    2. Set Text=false, Icon Right=true, Icon Left=false
+    3. Set Icon-Right INSTANCE_SWAP to the brand icon ID
+    4. Set layoutSizingHorizontal='FILL' for equal-width row
+
+  segmented_picker_setup: >
+    Instantiate Segmented Picker component.
+    Set Style=Pills or Style=Navigation Tabs.
+    Active tab should be "Log In" (login) or "Sign Up" (signup).
+    Unselected tab bg must match picker container bg (see DSSegmentedPicker.yaml).
+
+  content_principles: >
+    Login content should be specific to the app:
+    - "Welcome back!" subtitle appropriate for returning users
+    - CTA text should be engaging: "Let's Roll!", "Get Started", "Jump In" — not generic "Submit"
+    - Brand icon/logo next to the headline adds identity
+    - "Or better yet..." is more inviting than just "Or..."
+    - Social buttons labeled "Continue with Google" (not "Sign in with Google")

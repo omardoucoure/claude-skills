@@ -1,0 +1,114 @@
+pattern: splash
+description: App launch/splash screens with brand logo, tagline, version number, and visual identity
+source: HaHo Design System — 3 splash screen variants analyzed (brand-focused launch screens)
+figma_references:
+  splash_cards_stacked:
+    reference: "[Splash] 1 — Neutral card ('Ready, set, Haho!' + brand icon) + dark card ('Spark Your Neurons!') + coral card ('HA' letters + 'Ignite Your Imagination!')"
+    nodeId: "85:56132"
+  splash_centered_logo:
+    reference: "[Splash] 2 — Large centered brand logo + dark card ('V 3.8' + settings icon) + coral bar ('Ignite Your Imagination!' + icon)"
+    nodeId: "85:56119"
+  splash_reversed:
+    reference: "[Splash] 3 — Coral bar top ('Spark Your Neurons!' + icon) + dark bar ('V 3.8' + settings icon) + centered brand logo + tagline"
+    nodeId: "85:56105"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  brand_logo:
+    description: App brand logo — the visual centerpiece
+    structure: >
+      Large brand logo (80-120px) centered or offset.
+      The HaHo logo is a geometric arrow/chevron shape in dark green + coral accent.
+      Can be placed: centered on screen, inside a card, or alongside tagline text.
+    sizes:
+      - large: "80-120px, centered, prominent — the hero element"
+      - medium: "48-64px, inside a card alongside text"
+      - small: "32px, as an accent icon next to tagline"
+
+  tagline:
+    description: App tagline or motto
+    options:
+      - primary_tagline: "'Ready, set, Haho!' — h4 (24px medium) or h2 (36px)"
+      - secondary_tagline: "'Spark Your Neurons!' — bodySemiBold or h5 inside colored bar"
+      - tertiary_tagline: "'Ignite Your Imagination!' — body inside coral/dark bar"
+    note: HaHo uses multiple taglines on different color zones for visual richness.
+
+  version_info:
+    description: App version number
+    structure: >
+      'V 3.8' text (caption 14px) + settings/gear icon.
+      Inside a dark bar (surfacePrimary100, r16-32) or subtle text.
+      Small and unobtrusive — informational, not promotional.
+
+  color_zone_cards:
+    description: Stacked colored cards creating the splash visual
+    structure: >
+      3 stacked cards creating a rich brand identity:
+      1. Neutral card (surfaceNeutral2, r32): tagline + brand icon
+      2. Dark card (surfacePrimary100, r32): secondary tagline or 'Spark Your Neurons!'
+      3. Coral card (surfaceSecondary100, r32): large brand letters ('HA') + tertiary tagline
+      Cards can overlap slightly for depth.
+    variants:
+      - stacked_top_down: "Neutral → Dark → Coral from top to bottom"
+      - reversed: "Coral bar → Dark bar → Logo + tagline"
+      - centered_minimal: "Large logo centered + bars above and below"
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  stacked_cards:
+    description: "3 colored zone cards stacked vertically — rich brand visual"
+    zones: [status_bar, neutral_card(tagline+icon), dark_card(secondary_tagline), coral_card(brand_letters+tagline)]
+    spacing:
+      card_gap: 12px
+    structure: >
+      Full screen divided into 3 color zones:
+      Top: neutral card with primary tagline + small brand icon (top-right)
+      Middle: dark card with 'Spark Your Neurons!' + brand logo watermark
+      Bottom: coral card with oversized brand letters (HA/HO) + 'Ignite Your Imagination!'
+      Each card fills width (padL=12, padR=12) with r32 corners.
+    best_for: Brand-heavy splash, apps with strong visual identity
+
+  centered_logo:
+    description: "Large centered logo with color bars above and below"
+    zones: [status_bar, spacer, brand_logo(large_centered), spacer, dark_bar(version), coral_bar(tagline)]
+    structure: >
+      Large brand logo centered vertically in the upper 60% of screen.
+      Below: dark bar with version number + settings icon.
+      Below: coral bar with tagline + icon.
+      Clean, logo-focused design.
+    best_for: Minimalist splash, brand recognition
+
+  reversed_bars:
+    description: "Coral bar at top + version bar + centered logo with tagline"
+    zones: [status_bar, coral_bar(tagline+icon), dark_bar(version), brand_logo(centered)+tagline]
+    structure: >
+      Coral bar at top: 'Spark Your Neurons!' + brand icon.
+      Dark bar below: 'V 3.8' + settings icon.
+      Rest of screen: centered brand logo + 'Ready, set, Haho!' tagline.
+    best_for: Content-first splash, immediate engagement
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Splash screens are PURE BRANDING — no functional UI elements, no forms, no lists
+  - Brand logo must be the clear focal point — largest or most centered element
+  - Use ALL THREE color zones (neutral + dark + coral) for maximum visual impact
+  - Taglines: engaging, playful, action-oriented — 'Ready, set, Haho!' not 'Welcome to Haho'
+  - Version text: subtle, small (caption 14px), inside dark bar — never prominent
+  - Oversized brand letters ('HA', 'HO'): h1 (40px+) or larger, used as decorative elements on coral cards
+  - Card corners: r32 for all splash cards
+  - Screen padding: padL=12, padR=12, padB=12
+  - No navigation elements — splash screens are passive (auto-advance or tap to continue)
+  - Page background surfaceNeutral0_5
+  - Brand icon: small (32px) when used as accent alongside text, large (80-120px) when standalone
+  - Coral bars: dark text (textNeutral9) — NEVER white text on coral
+  - Dark bars: light text (textNeutral0_5)
+  - Neutral cards: dark text (textNeutral9)
+  - Cards should feel full and visually rich — use large text, brand letters, icons to fill space
+  - The splash screen sets the visual tone for the entire app — it must feel premium and intentional
+
+components:
+  - DSCard (colored zone cards — neutral, dark, coral)
+  - DSButton (optional 'Get Started' CTA if splash requires user action)

@@ -1,0 +1,221 @@
+pattern: media
+description: Music player, podcast player, audio streaming, playlists, album browsing, artist pages, and media library screens
+source: HaHo Design System — 18 media screen variants analyzed (now playing + playlists + library + artist + podcast)
+figma_references:
+  now_playing_centered:
+    reference: "[Media] 1 — Search bar + large album art (DSProgressCircle surround) + track name + artist + playback controls + equalizer"
+    nodeId: "85:37274"
+  now_playing_card:
+    reference: "[Media] 2 — Now playing with album art in card + controls below"
+    nodeId: "85:37247"
+  now_playing_dark:
+    reference: "[Media] 3 — Dark background now playing with large artwork"
+    nodeId: "85:37196"
+  now_playing_minimal:
+    reference: "[Media] 4 — Minimal player with artwork + progress bar + controls"
+    nodeId: "85:37158"
+  now_playing_waveform:
+    reference: "[Media] 5 — Player with dark album art card + waveform visualization + controls on dark card"
+    nodeId: "85:37119"
+  playlist_track_list:
+    reference: "[Media] 6 — Playlist with cover art + track list (number + name + duration + bookmark)"
+    nodeId: "85:37074"
+  playlist_dark:
+    reference: "[Media] 7 — Dark playlist view with track list"
+    nodeId: "85:37023"
+  library_grid:
+    reference: "[Media] 8 — Music library grid (album covers + names)"
+    nodeId: "85:36968"
+  library_categories:
+    reference: "[Media] 9 — Library categories (playlists, artists, albums, genres)"
+    nodeId: "85:36937"
+  artist_page:
+    reference: "[Media] 10 — Artist page with bio + top tracks + albums"
+    nodeId: "85:36911"
+  podcast_player:
+    reference: "[Media] 11 — Podcast player with episode info + chapters"
+    nodeId: "85:36883"
+  podcast_list:
+    reference: "[Media] 12 — Podcast episode list with thumbnails"
+    nodeId: "85:36784"
+  album_detail:
+    reference: "[Media] 13 — Album detail with tracklist"
+    nodeId: "85:36733"
+  radio_stations:
+    reference: "[Media] 14 — Radio stations with live indicator"
+    nodeId: "85:36691"
+  queue_list:
+    reference: "[Media] 15 — Queue / up next list"
+    nodeId: "85:36645"
+  favorites_tabs:
+    reference: "[Media] 16 — My Favorites + hero album art + Albums/Playlists/Artists tabs + track list"
+    nodeId: "85:36623"
+  search_results:
+    reference: "[Media] 17 — Music search results (songs, albums, artists)"
+    nodeId: "85:36576"
+  mini_player:
+    reference: "[Media] 18 — Screen with mini player bar at bottom"
+    nodeId: "85:36474"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    now_playing: "Search bar (DSSearchField) or back arrow + more icon"
+    playlist: "Back arrow + playlist name + share/edit icons"
+    library: "Back arrow + 'My Favorites' / 'Library' + search/filter icons"
+    artist: "Back arrow + artist name + follow button"
+
+  album_art:
+    description: Large artwork display — the visual focal point
+    options:
+      - centered_circle: >
+          Large circular album art (200-240px) centered on screen.
+          DSProgressCircle surround showing playback progress (coral arc).
+          Heart/favorite icon overlay. Shadow behind for depth.
+      - card_artwork: >
+          Album art inside DSCard (surfaceNeutral2, r32).
+          Square image with rounded corners. Track info below inside card.
+      - dark_artwork: >
+          Large album art on dark background (surfacePrimary100/120).
+          Full-width or padded with dark card behind.
+      - hero_banner: >
+          Wide album art banner (r32) at top with artist/album name overlay.
+          Track info and duration overlay on bottom-right of image.
+
+  track_info:
+    description: Song/episode title and artist name
+    structure: >
+      Track name: h4 (24px medium) or h5 (20px medium) centered.
+      Artist name: body (16px regular) or caption (14px) below, 60% opacity.
+      Optional: album name, year, genre.
+
+  playback_controls:
+    description: Media control buttons
+    structure: >
+      Row of 5 controls centered:
+      - Shuffle (small icon button)
+      - Previous/rewind (medium icon button)
+      - Play/Pause (large circle, 56-64px, filledA or filledC)
+      - Next/forward (medium icon button)
+      - Repeat (small icon button)
+    variants:
+      - standard: "5 icons in a row: shuffle, prev, play, next, repeat"
+      - minimal: "3 icons: prev, play, next"
+      - with_waveform: "Controls above waveform visualization"
+
+  progress_bar:
+    description: Playback progress indicator
+    structure: >
+      Thin horizontal bar: elapsed time (left) + progress track + remaining time (right).
+      Active portion = coral (surfaceSecondary100), inactive = neutral (surfaceNeutral2).
+      Current position dot/handle on the track.
+    alternative: >
+      Waveform visualization replacing standard progress bar:
+      vertical bars showing audio waveform with coral fill for played portion.
+
+  track_list:
+    description: List of tracks/episodes in playlist or album
+    structure: >
+      Each row: DSListItem with:
+      - Track number or thumbnail (leading)
+      - Track name (bodySemiBold) + artist (caption)
+      - Duration text (caption, right) + bookmark/more icon (trailing)
+      Optional: playing indicator (equalizer animation bars) for current track.
+    components:
+      - "DSListItem (track rows)"
+      - "DSDivider (between tracks)"
+
+  category_tabs:
+    description: Content type filter
+    options:
+      - segmented: "DSSegmentedPicker: Albums / Playlists / Artists"
+      - chip_row: "Scrolling DSChip row: All / Rock / Jazz / Electronic / ..."
+
+  mini_player:
+    description: Persistent mini player bar at bottom
+    structure: >
+      Floating bar (surfaceNeutral2, r32, 56px height) at bottom:
+      - Album art thumbnail (40px, r8)
+      - Track name + artist (body/caption, truncated)
+      - Play/Pause icon button + Next icon button
+      Progress line (2px, coral) at top of bar showing elapsed.
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  now_playing:
+    description: "Full now-playing screen — artwork + info + progress + controls"
+    zones: [top_bar, album_art(centered_circle_or_card), track_info, progress_bar, playback_controls, home_indicator]
+    spacing:
+      art_to_info: 24px
+      info_to_progress: 24px
+      progress_to_controls: 16px
+    best_for: Active media playback, music/podcast listening
+
+  playlist_detail:
+    description: "Playlist/album view — cover art + track list"
+    zones: [top_bar, album_art(hero_banner), track_list(scrollable), mini_player]
+    spacing:
+      art_to_list: 16px
+      track_gap: 0px (flush with dividers)
+    best_for: Playlist browsing, album exploration
+
+  library_browse:
+    description: "Library grid — category tabs + album cover grid"
+    zones: [top_bar, category_tabs, library_grid(album_covers), mini_player]
+    spacing:
+      tabs_to_grid: 16px
+      grid_gap: 12px
+    best_for: Music library, collection browsing
+
+  favorites_page:
+    description: "My Favorites — hero art + tabs (Albums/Playlists/Artists) + track list"
+    zones: [top_bar, album_art(hero_banner), category_tabs(segmented), track_list, home_indicator]
+    spacing:
+      art_to_tabs: 16px
+      tabs_to_list: 12px
+    best_for: Favorites collection, personal library
+
+  artist_profile:
+    description: "Artist page — hero image + bio + top tracks + discography"
+    zones: [top_bar, artist_hero(image), artist_bio, top_tracks_list, albums_carousel]
+    spacing:
+      hero_to_bio: 16px
+      bio_to_tracks: 24px
+    best_for: Artist detail, discography browsing
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Album art: circular with DSProgressCircle surround for now-playing, square (r16-32) for lists/grids
+  - Play/Pause button: large circle (56-64px), filledA (coral) or filledC (dark), centered
+  - Progress bar: coral active portion, neutral inactive, thin (4px height)
+  - Track duration: caption (14px), right-aligned in track rows
+  - Now-playing waveform: vertical bars (2-3px wide, 8-16 bars), coral fill for played, dark for unplayed
+  - Track list rows: DSListItem with track number + name + duration + more icon
+  - Currently playing track: equalizer animation bars (3 small bars animating) as indicator
+  - Album cover grid: 2-column, square images, r16, album name + artist below
+  - Mini player: floating bar at bottom (r32, 56px), persistent across screens
+  - Search bar in media: DSSearchField at top for finding tracks/artists/albums
+  - Tab filters: DSSegmentedPicker for Albums/Playlists/Artists switching
+  - Dark media screens: surfacePrimary100/120 bg with light text, coral accents
+  - Heart/favorite icon on album art overlay: top-right or bottom-left
+  - Artist page: hero image (full-width, r32) with gradient overlay for text
+  - Page background surfaceNeutral0_5 (light) or surfacePrimary120 (dark variants)
+  - Controls icons: shuffle, skip-back, play/pause, skip-forward, repeat — map to DS icon names
+  - Use real HaHo space/nature images for album art — atmospheric and visually rich
+
+components:
+  - DSProgressCircle (playback progress surround, loading states)
+  - DSCard (album art card, playlist card, track cards)
+  - DSButton (play/pause, shuffle, repeat, skip controls)
+  - DSListItem (track rows, episode rows)
+  - DSSearchField (music search)
+  - DSSegmentedPicker (category tabs)
+  - DSChip (genre/mood filters)
+  - DSTopAppBar (navigation)
+  - DSAvatar (artist thumbnails)
+  - DSDivider (between tracks)
+  - DSBadge (live indicator, new episode)
+  - DSPageControl (album art carousel dots)

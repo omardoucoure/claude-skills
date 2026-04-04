@@ -1,0 +1,192 @@
+pattern: search
+description: Search screens with explore/discovery, search results, category browsing, recent searches, trending topics, and content type filters
+source: HaHo Design System — 11 search screen variants analyzed (explore + results + filters + categories + keyboard states)
+figma_references:
+  explore_categories_dark:
+    reference: "[Search] 1 — 'Search' headline + 'Find Recipes' link + dark card with 2x3 icon category grid (Vegan/Pizza/Asian/BBQ/Quick/Dessert) + coral links (All Recipes/All Stories)"
+    nodeId: "85:36422"
+  explore_minimal:
+    reference: "[Search] 2 — Minimal search with recent searches list"
+    nodeId: "85:36410"
+  explore_trending:
+    reference: "[Search] 3 — Trending topics + popular searches"
+    nodeId: "85:36398"
+  explore_categories_chips:
+    reference: "[Search] 4 — 'Explore' headline + categories chip cloud (Psychology/Management/Leadership/...) + 'Collections' section with image cards"
+    nodeId: "85:36352"
+  results_list:
+    reference: "[Search] 5 — Search results as flat list items"
+    nodeId: "85:36339"
+  results_grid:
+    reference: "[Search] 6 — Search results in grid layout"
+    nodeId: "85:36322"
+  results_tabs:
+    reference: "[Search] 7 — Results with content type tabs (All/Images/Videos/People)"
+    nodeId: "85:36309"
+  results_filters:
+    reference: "[Search] 8 — Results with filter chips + sorting"
+    nodeId: "85:36267"
+  search_suggestions:
+    reference: "[Search] 9 — Search input with suggestion dropdown"
+    nodeId: "85:36229"
+  results_with_keyboard:
+    reference: "[Search] 10 — Search input + content tabs (Books/Articles/Media) + article results list + keyboard visible"
+    nodeId: "85:36187"
+  search_empty:
+    reference: "[Search] 11 — Empty search state with illustration"
+    nodeId: "85:36162"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    explore: "Back arrow + search icon or no top bar — search field IS the top"
+    results: "Back arrow + search field (filled with query) + filter icon"
+
+  search_field:
+    description: Search input — the focal point
+    structure: >
+      DSSearchField (full-width, r360 pill shape or r16 rounded rect).
+      Placeholder: 'Search...', 'Find Recipes', 'Design I...'
+      Left icon: search magnifying glass.
+      Right icon: clear (X) when text entered, or microphone for voice search.
+      Active state: focused with keyboard visible, coral/dark accent border.
+    placement: >
+      Usually the very top of the screen (below status bar).
+      Sometimes inside a colored hero card (dark or coral header area).
+
+  explore_content:
+    description: Discovery content shown before any search query
+    options:
+      - category_grid: >
+          Dark card (surfacePrimary100, r32, pad24) with 2x3 or 3x3 icon grid.
+          Each cell: icon (24px, white) + category label (caption, white).
+          Categories: Vegan, Pizza, Asian, BBQ, Quick, Dessert (context-specific).
+      - category_chips: >
+          Chip cloud (DSChip instances) wrapping to multiple lines.
+          Categories: Psychology, Management, Leadership, Meditation, etc.
+          'See all' outlined pill button for the full list.
+      - trending_list: >
+          'Trending' section header + numbered list of trending searches.
+          Each row: number (coral) + search term (body) + trend icon.
+      - recent_searches: >
+          'Recent' section header + list of recent search terms.
+          Each row: clock icon + search term + X remove button.
+      - collections: >
+          'Collections' section header + 'See all' button.
+          Horizontal scroll of image cards (r16) with title overlay.
+          Content-specific collections (e.g., book collections, recipe sets).
+
+  quick_links:
+    description: Direct navigation links on explore screen
+    structure: >
+      Coral card section (surfaceSecondary100, r32, pad16-24):
+      - 'All Recipes →' link row with icon
+      - 'All Stories →' link row with icon
+      Dark text on coral. Each is a navigable DSListItem-style row.
+
+  result_list:
+    description: Search results display
+    structure: >
+      Each result: DSListItem with:
+      - Thumbnail image or icon (leading, 48px, r8)
+      - Title (bodySemiBold) — highlighted matching text
+      - Subtitle/description (caption, 60% opacity, truncated)
+      - Action icon (trailing) — bookmark, heart, arrow
+    variants:
+      - flat_list: "Stacked rows with dividers, no card wrappers"
+      - card_list: "Each result in its own card (surfaceNeutral2, r16)"
+      - grid_results: "2-column grid of image cards with title overlay"
+
+  content_tabs:
+    description: Content type filter tabs
+    structure: >
+      DSSegmentedPicker or horizontal scrolling tabs:
+      Books / Articles / Media, or All / Images / Videos / People.
+      Active tab = filled dark or underlined. Inactive = text only.
+    placement: Between search field and results list.
+
+  keyboard:
+    description: iOS keyboard (QWERTY)
+    structure: >
+      Standard QWERTY keyboard at bottom of screen.
+      Visible when search field is focused.
+      Pushes content up — results list scrolls above keyboard.
+    note: In Figma, the keyboard is part of the design to show the active search state.
+
+  empty_state:
+    description: No results found display
+    structure: >
+      Centered: illustration/icon + 'No results found' title +
+      'Try different keywords' suggestion + optional CTA button.
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  explore_page:
+    description: "Search home — search field + explore categories + quick links + collections"
+    zones: [search_field, explore_content(category_grid_or_chips), quick_links, collections, home_indicator]
+    spacing:
+      search_to_categories: 16px
+      categories_to_links: 12px
+      links_to_collections: 24px
+    best_for: Search landing page, content discovery
+
+  active_search:
+    description: "Search with keyboard — search field + suggestions or results + keyboard"
+    zones: [top_bar, search_field(focused), content_tabs, result_list, keyboard]
+    spacing:
+      field_to_tabs: 12px
+      tabs_to_results: 12px
+    best_for: Active searching with real-time results
+
+  results_page:
+    description: "Search results — query + content tabs + results list/grid"
+    zones: [top_bar, search_field(with_query), content_tabs, result_list(scrollable), home_indicator]
+    spacing:
+      field_to_tabs: 12px
+      tabs_to_results: 16px
+      result_gap: 0px or 12px
+    best_for: Viewing search results, content browsing
+
+  filtered_results:
+    description: "Results with filters — search + filter chips + sorted results"
+    zones: [top_bar, search_field, filter_chips, sort_selector, result_list, home_indicator]
+    spacing:
+      field_to_chips: 12px
+      chips_to_results: 16px
+    best_for: Refined search with multiple filters
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Search field is ALWAYS the most prominent element — large, full-width, at top
+  - DSSearchField: r360 (pill) or r16 (rounded), surfaceNeutral2 background
+  - Coral border on search field when focused/active
+  - Category grids inside dark cards: white icons + white labels for contrast
+  - Category chips: DSChip outlined style, wrapping to multiple lines
+  - 'See all' buttons: outlined pill (DSButton outlined, small) aligned right of section headers
+  - Recent searches: clock icon (leading) + search term + X button (trailing)
+  - Trending items: numbered (coral number) + search term + arrow/trend icon
+  - Result highlighting: matching query text in bold or coral color within result titles
+  - Content tabs: DSSegmentedPicker for 3-4 tabs, scrolling chips for more
+  - Result thumbnails: 48px square, r8, image or placeholder icon
+  - Bookmark/save icon on results: trailing position in each row
+  - Keyboard visible = search is active — show suggestions above keyboard
+  - Quick links on coral cards: dark text (textNeutral9) on surfaceSecondary100
+  - Collection image cards: r16, horizontal scroll, title + subtitle overlay at bottom
+  - Page background ALWAYS surfaceNeutral0_5
+  - Screen padding: padL=12, padR=12
+  - Search headline ('Search' or 'Explore'): h2 (36px) or h4 (24px) for the landing page title
+
+components:
+  - DSSearchField (search input — the primary component)
+  - DSCard (category grid card, collection cards, result cards)
+  - DSChip (category chips, filter chips)
+  - DSSegmentedPicker (content type tabs)
+  - DSListItem (result rows, recent search rows, trending rows)
+  - DSButton (See all, clear, filter actions)
+  - DSTopAppBar (navigation on results pages)
+  - DSBadge (result count, trending indicator)
+  - DSDivider (between results)
+  - DSAvatar (user results in people search)

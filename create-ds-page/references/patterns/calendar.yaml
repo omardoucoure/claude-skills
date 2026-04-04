@@ -1,0 +1,221 @@
+pattern: calendar
+description: Calendar month/week/day views, event lists, event details, scheduling, date pickers, and agenda screens
+source: HaHo Design System — 18 calendar screen variants analyzed (month grid + week timeline + day schedule + event list + event detail)
+figma_references:
+  month_date_picker:
+    reference: "[Calendar] 1 — Month view with date picker grid (Mon-Sun) + selected date (Mon Aug 17) + weather bar at bottom"
+    nodeId: "85:40950"
+  month_events:
+    reference: "[Calendar] 2 — Month calendar + event cards below"
+    nodeId: "85:40734"
+  month_compact:
+    reference: "[Calendar] 3 — Compact month grid + event list"
+    nodeId: "85:40566"
+  month_dark:
+    reference: "[Calendar] 4 — Dark theme month calendar"
+    nodeId: "85:40521"
+  week_horizontal:
+    reference: "[Calendar] 5 — Horizontal week day strip + event cards below"
+    nodeId: "85:40169"
+  week_events_list:
+    reference: "[Calendar] 6 — Upcoming Events + date range chips + week labels + event cards (day+title+description+icon)"
+    nodeId: "85:40108"
+  week_timeline:
+    reference: "[Calendar] 7 — Week column headers + hourly timeline grid with event blocks"
+    nodeId: "85:40026"
+  day_hours:
+    reference: "[Calendar] 8 — Day view with hour-by-hour grid"
+    nodeId: "85:39779"
+  day_timeline:
+    reference: "[Calendar] 9 — Day view with horizontal day strip + hourly timeline + colored event blocks (coral/dark/neutral)"
+    nodeId: "85:39703"
+  day_schedule:
+    reference: "[Calendar] 10 — Day schedule with time slots + event cards"
+    nodeId: "85:39499"
+  event_detail:
+    reference: "[Calendar] 11 — Event detail with time, location, attendees, notes"
+    nodeId: "85:39437"
+  event_create:
+    reference: "[Calendar] 12 — Create event form (title, date, time, location, notes)"
+    nodeId: "85:39227"
+  agenda_list:
+    reference: "[Calendar] 13 — Agenda view with date headers + event cards"
+    nodeId: "85:38970"
+  agenda_dark:
+    reference: "[Calendar] 14 — Dark agenda with colored event indicators"
+    nodeId: "85:38743"
+  calendar_stats:
+    reference: "[Calendar] 15 — Calendar with statistics card (Mon Aug 17) + dark 3D globe/sphere card below"
+    nodeId: "85:38538"
+  year_overview:
+    reference: "[Calendar] 16 — Year overview with small month grids"
+    nodeId: "85:38473"
+  calendar_minimal:
+    reference: "[Calendar] 17 — Minimal clean calendar"
+    nodeId: "85:38262"
+  calendar_extra:
+    reference: "[Calendar] 18 — Additional calendar variant"
+    nodeId: "85:40650"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    month: "Back arrow + month name ('August') / 'Today, 8 Aug' + calendar/list view toggle icon"
+    week: "Back arrow + 'Upcoming Events' + search/filter icons"
+    day: "Back arrow + day date + add event (+) icon"
+    event: "Back arrow + 'Event Details' + edit/delete icons"
+
+  calendar_grid:
+    description: Month calendar grid
+    structure: >
+      7-column grid (M T W T F S S headers).
+      Day cells: number text, 32px circle.
+      Today: coral filled circle (surfaceSecondary100) with dark text.
+      Selected: dark filled circle (surfacePrimary100) with light text.
+      Event indicators: small dots below day numbers (coral, dark, or multi-color).
+      Other month days: 30% opacity text.
+    sizes:
+      - full_month: "Complete month grid (5-6 rows of 7)"
+      - compact_month: "Collapsed month showing only current week + expand button"
+
+  day_strip:
+    description: Horizontal scrollable day selector
+    structure: >
+      Horizontal row of day cells (48-56px wide each):
+      - Day letter (M, T, W, ...) on top (caption 14px)
+      - Day number below (bodySemiBold or h5)
+      - Active day: dark or coral circle behind number
+      - Today indicator: colored dot below
+      Scrollable left/right.
+
+  time_grid:
+    description: Hourly timeline for day/week views
+    structure: >
+      Left column: hour labels (5:00, 6:00, 7:00, ...) in caption (14px).
+      Main area: horizontal grid lines at each hour.
+      Event blocks placed at correct time slots:
+      - Coral block (surfaceSecondary100, r16): primary events
+      - Dark block (surfacePrimary100, r16): secondary events
+      - Neutral block (surfaceNeutral2, r16): other events
+      Block height proportional to event duration.
+      Current time: red horizontal line across grid.
+
+  event_cards:
+    description: Event summary cards in list or agenda view
+    structure: >
+      Each event: DSCard or row with:
+      - Date section: day of week short (Mon) + day number (06) in a side column
+      - Event name (bodySemiBold or h5)
+      - Description preview (caption, 60% opacity)
+      - Category icon (right side)
+      - Color indicator: coral/dark/neutral left border or bg tint
+    variants:
+      - card_style: "Each event in its own card (surfaceNeutral2, r16, pad16)"
+      - list_style: "Flat list rows with dividers"
+      - timeline_style: "Connected by vertical line with dot markers"
+
+  event_detail:
+    description: Full event information
+    structure: >
+      - Time: start/end display (07:00 Starts — 10:00 Ends) with clock icon
+      - Date: full date with calendar icon
+      - Location: venue name + map preview
+      - Attendees: avatar row (DSAvatar, stacked overlapping)
+      - Notes/description: body text
+      - Actions: Edit, Delete, Share buttons
+
+  weather_bar:
+    description: Optional weather info at bottom
+    structure: >
+      Row of weather stats: Temperature (28 degrees) + Wind Speed (12 m/s) + Humidity (62%).
+      Each with small icon above. Subtle, informational.
+
+  date_range:
+    description: Date range selector for filtered views
+    structure: >
+      Two chips showing 'Starting: 06 March' and 'Until: 30 March' with calendar icons.
+      Tapping opens date picker.
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  month_view:
+    description: "Full month calendar — grid + selected date + events list"
+    zones: [top_bar(month_name), calendar_grid(full_month), selected_date_info, event_cards(below), home_indicator]
+    spacing:
+      grid_to_events: 16px
+      event_gap: 12px
+    best_for: Month overview, date selection, event browsing
+
+  week_view:
+    description: "Week timeline — day strip + hourly grid with event blocks"
+    zones: [top_bar(date), day_strip, time_grid(with_event_blocks), home_indicator]
+    spacing:
+      strip_to_grid: 8px
+    best_for: Weekly planning, scheduling, time management
+
+  day_view:
+    description: "Day schedule — selected date + hourly timeline + events"
+    zones: [top_bar(day_date), day_strip, time_grid(single_day), home_indicator]
+    spacing:
+      strip_to_grid: 8px
+    best_for: Daily planning, detailed schedule
+
+  agenda_view:
+    description: "Agenda list — date headers + event cards grouped by day/week"
+    zones: [top_bar, date_range, week_label, event_cards(grouped_by_date), home_indicator]
+    spacing:
+      date_header_to_events: 8px
+      event_gap: 12px
+      between_date_groups: 24px
+    best_for: Upcoming events, agenda browsing
+
+  event_detail_view:
+    description: "Event details — time + date + location + attendees + notes"
+    zones: [top_bar, event_detail, action_buttons, home_indicator]
+    spacing:
+      section_gap: 16px
+    best_for: Viewing/editing individual events
+
+  calendar_with_stats:
+    description: "Calendar + statistics/data card below"
+    zones: [top_bar, calendar_grid(compact), stats_card, home_indicator]
+    spacing:
+      grid_to_stats: 16px
+    best_for: Calendar with data visualization, health/fitness tracking
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Calendar grid: 7 columns (M T W T F S S), day headers in caption (14px, 50% opacity)
+  - Today indicator: coral filled circle (surfaceSecondary100, r360) with DARK text (textNeutral9 on coral)
+  - Selected date: dark filled circle (surfacePrimary100, r360) with LIGHT text (textNeutral0_5)
+  - Event dots below day numbers: 4-6px circles, multiple colors for multiple events
+  - Day strip: horizontal scroll, active day has filled circle background
+  - Time grid hour labels: caption (14px), left-aligned, every hour
+  - Event blocks in timeline: colored rectangles (r16), height = duration, coral for primary events
+  - Current time indicator: thin red/coral horizontal line across the full width
+  - Event cards: colored left border (4px, coral/dark/green) for category indication
+  - Date group headers in agenda: caption (14px) + "Week, 6-12 March · 2 Events"
+  - Event card date column: day-of-week (small 12px) + day number (h5 20px medium) vertically stacked
+  - Attendee avatars: DSAvatar instances, overlapping (negative margin), 32-40px size
+  - Weather bar: subtle informational row, never dominant, small icons + values
+  - Page background ALWAYS surfaceNeutral0_5
+  - Screen padding: padL=12, padR=12
+  - Calendar cards: surfaceNeutral2, r32, pad16-24
+  - Month navigation: left/right arrows for previous/next month
+  - DSDatePicker can be used for the calendar grid component
+
+components:
+  - DSDatePicker (calendar grid)
+  - DSCard (event cards, calendar container, stats cards)
+  - DSButton (add event, edit, delete, navigation arrows)
+  - DSListItem (event rows, time slots)
+  - DSChip (date range chips, category filters)
+  - DSSegmentedPicker (view mode: Month/Week/Day)
+  - DSAvatar (attendee avatars)
+  - DSBadge (event count, notification count)
+  - DSTopAppBar (navigation)
+  - DSDivider (between events, between time slots)
+  - DSProgressCircle (stats/completion tracking)

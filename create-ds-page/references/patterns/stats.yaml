@@ -1,0 +1,228 @@
+pattern: stats
+description: Statistics dashboards, analytics, earnings, transactions, progress tracking, and data visualization screens
+source: HaHo Design System — 24 stats screen variants analyzed (bar charts, line charts, progress circles, transaction lists, earnings summaries)
+figma_references:
+  earnings_bar_chart:
+    reference: "[Stats] 1 — Total Earnings + monthly bar chart (coral dots) + yearly summary card"
+    nodeId: "85:51387"
+  earnings_line_chart:
+    reference: "[Stats] 2 — Earnings line chart + period tabs + metric cards"
+    nodeId: "85:51271"
+  dashboard_progress:
+    reference: "[Stats] 3 — Dashboard with progress circles + metric cards"
+    nodeId: "85:51193"
+  multi_chart:
+    reference: "[Stats] 4 — Multiple chart types (bar + line + progress)"
+    nodeId: "85:51082"
+  dark_earnings:
+    reference: "[Stats] 5 — Dark card earnings + coral accent chart"
+    nodeId: "85:50900"
+  gauge_summary:
+    reference: "[Stats] 6 — Gauge/arc progress (26K Summary) + Earnings/Spendings badges + bar chart + card number"
+    nodeId: "85:50822"
+  transaction_list:
+    reference: "[Stats] 7 — Transaction list with amounts + types"
+    nodeId: "85:50764"
+  chart_grid:
+    reference: "[Stats] 8 — Grid of small chart cards"
+    nodeId: "85:50699"
+  period_comparison:
+    reference: "[Stats] 9 — Period comparison with percentage change"
+    nodeId: "85:50614"
+  detailed_analytics:
+    reference: "[Stats] 10 — Detailed analytics with multiple metrics"
+    nodeId: "85:50551"
+  progress_timeline:
+    reference: "[Stats] 11 — Progress timeline with milestones"
+    nodeId: "85:50488"
+  works_reviews:
+    reference: "[Stats] 12 — Works Done (560) + Reviews (12,380) with progress circles + profile views bar chart + timeline"
+    nodeId: "85:50401"
+  category_breakdown:
+    reference: "[Stats] 13 — Category breakdown with colored bars"
+    nodeId: "85:50345"
+  goal_tracking:
+    reference: "[Stats] 14 — Goal tracking with progress indicators"
+    nodeId: "85:49917"
+  minimal_stats:
+    reference: "[Stats] 15 — Minimal stat cards with sparklines"
+    nodeId: "85:49848"
+  transactions_chart_table:
+    reference: "[Stats] 16 — Transactions with coral chart card + Chart/Table toggle + transaction list with avatars"
+    nodeId: "85:49796"
+  weekly_report:
+    reference: "[Stats] 17 — Weekly report with day-by-day breakdown"
+    nodeId: "85:49737"
+  spending_analysis:
+    reference: "[Stats] 18 — Spending analysis with categories"
+    nodeId: "85:49677"
+  income_overview:
+    reference: "[Stats] 19 — Income overview with comparison"
+    nodeId: "85:49603"
+  budget_tracker:
+    reference: "[Stats] 20 — Budget tracker with limits"
+    nodeId: "85:49490"
+  savings_goal:
+    reference: "[Stats] 21 — Savings goal with progress"
+    nodeId: "85:49453"
+  portfolio:
+    reference: "[Stats] 22 — Portfolio/investment overview"
+    nodeId: "85:49411"
+  crypto_stats:
+    reference: "[Stats] 23 — Crypto/stock style stats"
+    nodeId: "85:49361"
+  financial_summary:
+    reference: "[Stats] 24 — Complete financial summary"
+    nodeId: "85:49314"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    options:
+      - title_with_icons: "Back arrow + 'Statistics' / 'Total Earnings' + notification/settings icon"
+      - title_with_avatar: "Back arrow + 'Statistics' + avatar (DSAvatar) for personalized dashboards"
+      - title_with_menu: "Back arrow + 'Transactions' + notification bell icon"
+
+  hero_metric:
+    description: Primary metric display — the big number
+    options:
+      - large_number: >
+          Large monetary value (h2 36px or larger) with currency symbol.
+          Optional: period label ('This Month'), comparison badge ('+12%' green or '-24%' red).
+      - gauge_arc: >
+          DSProgressCircle (arc/gauge style) with large number centered inside.
+          Summary label below. Useful for total/aggregate metrics.
+      - progress_circles: >
+          Multiple DSProgressCircle side by side for different metrics
+          (e.g., 560 Works Done, 12,380 Reviews). Each with label + count.
+
+  chart_section:
+    description: Data visualization area
+    options:
+      - bar_chart: >
+          DSBarChart or manual bar chart. Vertical bars with month/day labels below.
+          Coral dots on bar tops for emphasis. Grid lines behind.
+          Period comparison badge ('+12%' pill) floating top-right.
+      - line_chart: >
+          Line chart with coral/dark line, subtle grid behind.
+          Data points as circles on the line. X-axis = time periods.
+      - sparkline: >
+          Small inline bar charts inside metric cards.
+          Red/coral vertical bars in a row showing trend.
+      - mixed_chart: >
+          Combined bar + line chart for comparison views.
+
+  period_selector:
+    description: Time period filter
+    options:
+      - segmented_picker: "DSSegmentedPicker with 'All' / 'Month' / 'Week' / 'Day' tabs"
+      - chart_table_toggle: "DSSegmentedPicker with 'Chart' / 'Table' toggle"
+      - month_navigator: "Left arrow + 'August 2034' + Right arrow month navigation"
+
+  metric_cards:
+    description: Secondary metric summary cards
+    structure: >
+      Small cards (DSCard, surfaceNeutral2, r16-32) with:
+      - Metric label (caption 14px)
+      - Metric value (h5 20px or bodySemiBold)
+      - Optional: sparkline, percentage change badge, icon
+    variants:
+      - side_by_side: "2 cards in a row (50% width each)"
+      - full_width: "Single full-width metric card"
+      - dark_card: "Dark card (surfacePrimary100) with light text for emphasis"
+      - coral_card: "Coral card (surfaceSecondary100) for highlighted metric"
+
+  transaction_list:
+    description: List of individual transactions/activities
+    structure: >
+      Each row: DSListItem with avatar/icon leading + name (bodySemiBold) +
+      date/type (caption) + amount (bodySemiBold, right-aligned).
+      Optional: type badge (Payment/Debit), positive/negative color coding.
+    components:
+      - "DSListItem — transaction rows"
+      - "DSAvatar — user avatars for person-to-person transactions"
+      - "DSBadge — transaction type labels"
+
+  card_info:
+    description: Payment card display
+    structure: >
+      Card number row (masked: •••• •••• •••• 9321) + VISA/MC logo.
+      Inside a dark or coral card for visual distinction.
+    note: Used in financial stats screens to show connected payment method.
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  earnings_dashboard:
+    description: "Hero metric + chart + yearly comparison — the classic earnings view"
+    zones: [top_bar, hero_metric(large_number), chart_section(bar_chart), period_selector, yearly_card, home_indicator]
+    spacing:
+      metric_to_chart: 16px
+      chart_to_selector: 12px
+    best_for: Revenue/earnings tracking, financial overview
+
+  gauge_dashboard:
+    description: "Central gauge + metric badges + bar chart + card info"
+    zones: [top_bar, gauge_arc, metric_badges, chart_section(sparkline), card_info, home_indicator]
+    spacing:
+      gauge_to_badges: 16px
+      badges_to_chart: 24px
+    best_for: Summary/overview dashboards, spending analysis
+
+  progress_cards:
+    description: "Progress circles + profile views chart + timeline events"
+    zones: [top_bar, progress_circles_row, profile_views_card, timeline_list, home_indicator]
+    spacing:
+      circles_to_chart: 16px
+      chart_to_timeline: 16px
+    best_for: Work/productivity tracking, profile analytics
+
+  transactions_view:
+    description: "Chart card + Chart/Table toggle + transaction list"
+    zones: [top_bar, chart_card(coral_bg), period_selector(chart_table_toggle), transaction_list, home_indicator]
+    spacing:
+      chart_to_toggle: 12px
+      toggle_to_list: 16px
+    best_for: Transaction history, payment records
+
+  multi_metric:
+    description: "Multiple metric cards in grid + detailed breakdowns"
+    zones: [top_bar, metric_cards(grid_2x2), detail_list, home_indicator]
+    spacing:
+      grid_gap: 12px
+      grid_to_detail: 24px
+    best_for: Complex dashboards with many KPIs
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Hero metric numbers use h2 (36px) or larger — they are the focal point
+  - Percentage change badges: green/positive = success color, red/negative = coral/error. Use DSBadge.
+  - Bar charts: coral (surfaceSecondary100) bars or dots for primary data, neutral for secondary
+  - Line charts: coral or dark (surfacePrimary100) line with subtle grid behind
+  - Period selectors: DSSegmentedPicker with filled active tab
+  - Metric cards: surfaceNeutral2 for neutral, surfacePrimary100 for dark emphasis, surfaceSecondary100 for coral highlight
+  - Transaction amounts: positive = green/dark text, negative = red/coral text
+  - Transaction rows: DSListItem with avatar leading + name/date + amount trailing
+  - Card numbers always masked (show last 4 digits only)
+  - Dark metric cards use light text (textNeutral0_5), light cards use dark text (textNeutral9)
+  - Sparklines: small inline bar charts (8-12 bars, 4px wide, coral fill)
+  - DSProgressCircle for gauge/arc displays: use progressColor for coral/dark, customLabel for center text
+  - Page background ALWAYS surfaceNeutral0_5
+  - Mix card backgrounds (neutral + dark + coral) for visual hierarchy — never all same color
+  - Chart cards: r32, pad24, contain chart + labels
+  - Typography: metric values = h4/h5 (20-24px medium), labels = caption (14px), descriptions = body (16px regular)
+
+components:
+  - DSProgressCircle (gauge displays, progress indicators)
+  - DSCard (metric cards, chart containers, transaction cards)
+  - DSSegmentedPicker (period selection, chart/table toggle)
+  - DSListItem (transaction rows, metric breakdown rows)
+  - DSBadge (percentage change, transaction type, count)
+  - DSAvatar (user avatars in transactions)
+  - DSButton (navigation, export actions)
+  - DSTopAppBar (screen title + navigation)
+  - DSBarChart (bar chart visualization)
+  - DSDivider (between transaction rows)
+  - DSChip (filter tags)

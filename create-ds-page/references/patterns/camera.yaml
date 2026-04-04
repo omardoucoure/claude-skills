@@ -1,0 +1,211 @@
+pattern: camera
+description: Camera viewfinder, photo capture, image editing, photo gallery, album browsing, and image manipulation screens
+source: HaHo Design System — 23 camera screen variants analyzed (viewfinder + editing + gallery + albums)
+figma_references:
+  # ─── CAMERA / VIEWFINDER ─────────────────────────────────────────────────────
+  viewfinder_portrait:
+    reference: "[Camera] 1 — Camera viewfinder with face detection overlay + bottom mode tabs (Photo/Video/Portrait/etc.)"
+    nodeId: "85:38245"
+  viewfinder_landscape:
+    reference: "[Camera] 2 — Landscape camera with grid overlay + capture controls"
+    nodeId: "85:38157"
+  viewfinder_minimal:
+    reference: "[Camera] 3 — Minimal camera UI with floating controls"
+    nodeId: "85:38134"
+  viewfinder_zoom:
+    reference: "[Camera] 4 — Camera with zoom controls + flash/timer options"
+    nodeId: "85:38113"
+  viewfinder_filters:
+    reference: "[Camera] 5 — Camera with filter preview thumbnails at bottom"
+    nodeId: "85:38043"
+  viewfinder_scan:
+    reference: "[Camera] 6 — Scanner/QR code camera mode with scan frame"
+    nodeId: "85:38030"
+  viewfinder_timer:
+    reference: "[Camera] 7 — Camera with countdown timer display"
+    nodeId: "85:38008"
+  viewfinder_record:
+    reference: "[Camera] 8 — Video recording mode with red record button + building photo"
+    nodeId: "85:37994"
+
+  # ─── PHOTO EDITING ──────────────────────────────────────────────────────────
+  edit_crop_grid:
+    reference: "[Camera] 9 — Photo edit with crop grid overlay + adjust controls"
+    nodeId: "85:37938"
+  edit_adjustments:
+    reference: "[Camera] 10 — Full adjustment panel (exposure, contrast, saturation, etc.)"
+    nodeId: "85:37888"
+  edit_filters_gallery:
+    reference: "[Camera] 11 — Filter selection gallery with preview thumbnails"
+    nodeId: "85:37843"
+  edit_tools:
+    reference: "[Camera] 12 — Edit tools panel (crop, rotate, text, stickers, draw)"
+    nodeId: "85:37811"
+  edit_text_overlay:
+    reference: "[Camera] 13 — Text overlay editor on photo"
+    nodeId: "85:37727"
+  edit_stickers:
+    reference: "[Camera] 14 — Sticker/emoji overlay editor"
+    nodeId: "85:37703"
+
+  # ─── PHOTO GALLERY / ALBUMS ─────────────────────────────────────────────────
+  gallery_grid:
+    reference: "[Camera] 15 — Photo gallery grid (mixed sizes) grouped by date + album name + bottom tab bar"
+    nodeId: "85:37661"
+  gallery_album:
+    reference: "[Camera] 16 — Single album view with photo grid"
+    nodeId: "85:37604"
+  gallery_fullscreen:
+    reference: "[Camera] 17 — Fullscreen photo view with info overlay"
+    nodeId: "85:37571"
+  edit_brightness_saturation:
+    reference: "[Camera] 18 — Edit screen with Brightness/Saturation/Color Filter sliders + 3x3 preview grid"
+    nodeId: "85:37534"
+  gallery_stories:
+    reference: "[Camera] 19 — Stories/moments gallery with circular previews"
+    nodeId: "85:37494"
+  gallery_shared:
+    reference: "[Camera] 20 — Shared album with collaborator avatars"
+    nodeId: "85:37456"
+  gallery_select:
+    reference: "[Camera] 21 — Multi-select mode for gallery"
+    nodeId: "85:37430"
+  gallery_organize:
+    reference: "[Camera] 22 — Album organization/management"
+    nodeId: "85:37389"
+  gallery_minimal:
+    reference: "[Camera] 23 — Minimal photo browser"
+    nodeId: "85:37374"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    viewfinder: "Back arrow + 'Camera' title + flash/switch-camera icons"
+    editing: "X close + 'Edit' title + avatar + 'Save' text button"
+    gallery: "Back arrow + album name ('Space Invaders') + edit/share icons"
+
+  viewfinder_area:
+    description: Camera preview with overlays
+    structure: >
+      Full-screen or large-frame camera preview image.
+      Optional overlays: face detection rectangle (yellow border),
+      grid lines (rule of thirds), scan frame, zoom indicator.
+      The viewfinder takes most of the screen real estate.
+    options:
+      - full_bleed: "Camera fills entire screen behind all UI"
+      - framed: "Camera in a rounded card (r32) with controls outside"
+      - with_grid: "Grid overlay for composition (rule of thirds)"
+      - with_detection: "Face/object detection rectangles overlaid"
+
+  capture_controls:
+    description: Camera action buttons at bottom
+    structure: >
+      Center: Large capture button (72px circle, white border, red for video).
+      Left: Recent photo thumbnail (r8, 48px square).
+      Right: Camera flip icon button.
+      Above: Mode tabs (Photo/Video/Portrait/Slo-mo/Time-lapse).
+    components:
+      - "Large circle button for shutter/record"
+      - "Mode tabs (scrolling text labels)"
+      - "Flash, timer, HDR toggle icons"
+
+  edit_controls:
+    description: Image editing tools and adjustments
+    options:
+      - adjustment_sliders: >
+          Vertical list of adjustment rows: Brightness, Saturation, Color Filter, etc.
+          Each row: icon + label + current value + slider (coral accent for indicator).
+      - filter_strip: >
+          Horizontal scroll of filter preview thumbnails (56px square, r8).
+          Active filter has border ring. Filter name below each.
+      - tool_strip: >
+          Horizontal icon strip: Crop, Rotate, Text, Sticker, Draw, Blur.
+          Each tool = icon button with label below.
+      - crop_overlay: >
+          Drag handles on photo corners/edges. Aspect ratio buttons below.
+          Grid overlay on cropped area.
+
+  gallery_grid:
+    description: Photo grid layout
+    structure: >
+      Photos arranged in grid: mixed 1-large + 2-small per row,
+      or uniform 3-column grid. Grouped by date headers ('29 Aug 2030').
+      Rounded corners (r8-16) on individual photos.
+      Date headers: DSListItem-style with calendar icon + date text.
+    variants:
+      - mixed_grid: "Pinterest-style mixed sizes (1 large + 2 small alternating)"
+      - uniform_3col: "Even 3-column grid, square thumbnails"
+      - uniform_4col: "Even 4-column grid, smaller thumbnails"
+      - list_view: "Full-width images stacked vertically"
+
+  edit_preview:
+    description: Image being edited with overlays
+    structure: >
+      Photo displayed at center with editing overlays.
+      For crop: 3x3 grid with drag handles.
+      For text: text input field positioned on photo.
+      For brightness/saturation: 3x3 tiled preview of the effect.
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  camera_viewfinder:
+    description: "Full camera interface — viewfinder + mode tabs + capture button"
+    zones: [top_bar(overlay), viewfinder_area(full_bleed), capture_controls(bottom)]
+    spacing:
+      mode_tabs_above_capture: 16px
+    best_for: Camera capture, video recording, scanning
+
+  photo_editor:
+    description: "Edit interface — photo preview + adjustment controls below"
+    zones: [top_bar(edit_title_save), edit_preview, edit_controls(adjustment_sliders_or_tools)]
+    spacing:
+      preview_to_controls: 16px
+      control_gap: 12px
+    best_for: Photo editing, filter application, cropping
+
+  photo_gallery:
+    description: "Gallery view — date headers + photo grid + bottom tabs"
+    zones: [top_bar(album_name), gallery_grid(mixed_or_uniform), bottom_tab_bar]
+    spacing:
+      header_to_grid: 8px
+      grid_gap: 4px (tight grid) or 8px (spaced grid)
+      date_group_gap: 16px
+    best_for: Photo browsing, album viewing
+
+  fullscreen_photo:
+    description: "Fullscreen photo with minimal overlay controls"
+    zones: [top_bar(overlay_transparent), photo(fullscreen), action_bar(bottom_overlay)]
+    best_for: Photo viewing, sharing, detailed inspection
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Camera viewfinder takes full screen width, controls overlay on top
+  - Capture button: 72px white circle with 4px border, red filled center for video recording
+  - Camera mode tabs: horizontal scroll, active = bold/underlined text, inactive = regular/dimmed
+  - Photo grid gap: 4px for tight gallery, 8px for spaced gallery
+  - Gallery date headers: caption (14px) with calendar icon
+  - Edit sliders: coral accent line for the value indicator, dark track
+  - Filter preview thumbnails: 56px square, r8, active has dark border ring
+  - Edit tool icons: 24px, arranged horizontally with labels below
+  - 'Save' button: text button top-right during editing
+  - Photo overlays (detection, crop grid): thin colored borders (yellow for detection, white for crop)
+  - Gallery bottom tab bar: icons for Camera/Favorites/Albums/Search
+  - Album titles in gallery: h5 (20px) with edit/share icons
+  - Full-screen photo: swipe to navigate, tap to toggle controls overlay
+  - Use real HaHo photos — space, nature, portraits — NEVER grey placeholders
+  - Page background surfaceNeutral0_5 for gallery/editor, image-fill for viewfinder
+  - Edit screen: surfaceNeutral0_5 background with image centered in top half, controls in bottom half
+
+components:
+  - DSCard (photo cards, filter previews, album covers)
+  - DSButton (capture, mode buttons, tool actions, save)
+  - DSTopAppBar (navigation with camera/edit/gallery context)
+  - DSSegmentedPicker (camera mode tabs)
+  - DSChip (aspect ratio options, filter categories)
+  - DSListItem (adjustment rows, gallery date headers)
+  - DSAvatar (collaborator avatars in shared albums)
+  - DSDivider (between adjustment controls)
+  - DSPageControl (gallery navigation dots)

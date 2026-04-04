@@ -1,0 +1,376 @@
+pattern: walkthrough
+description: Onboarding, walkthrough, welcome, and intro screens — the first experience a user has with the app
+source: HaHo Design System — 18 walkthrough variants deeply analyzed (node trees + screenshots)
+figma_references:
+  # Each layout maps to a specific HaHo designer reference screen.
+  # Screenshot the ONE reference that matches your chosen layout — not all of them.
+
+  typography_hero_neutral:
+    reference: "[Walkthrough] 1 — Big text on neutral card + subtitle + nav arrows + dark CTA bar"
+    nodeId: "85:56093"
+
+  typography_hero_dark:
+    reference: "[Walkthrough] 18 — Big white text on dark card + subtitle + nav arrows + coral CTA bar"
+    nodeId: "85:55847"
+
+  image_layered_coral_text:
+    reference: "[Walkthrough] 2 — Layered image cards (3 depth layers) + coral text card + page dots"
+    nodeId: "85:56079"
+
+  carousel_horizontal_peek:
+    reference: "[Walkthrough] 3 — Horizontal scrollable cards with peek + page dots + dark text card"
+    nodeId: "85:56062"
+
+  accordion_steps:
+    reference: "[Walkthrough] 4 — Numbered overlapping step cards (coral→dark→dark) + image below"
+    nodeId: "85:56044"
+
+  layered_image_nav_arrows:
+    reference: "[Walkthrough] 5 — Layered Card image (3 depth layers) + nav arrows pill + coral text card"
+    nodeId: "85:56031"
+
+  gallery_carousel_peek:
+    reference: "[Walkthrough] 6 — 3-column image gallery (main + 2 peeking) + page dots + neutral text card"
+    nodeId: "85:56017"
+
+  cta_top_image_bottom:
+    reference: "[Walkthrough] 7 — Coral CTA bar at top (text+skip) + dark Login/Skip bar + image card below + page dots"
+    nodeId: "85:56003"
+
+  typography_hero_with_skip:
+    reference: "[Walkthrough] 8 — Coral skip bar at top + neutral card with nav arrows + big text + subtitle"
+    nodeId: "85:55990"
+
+  dark_carousel_coral_sides:
+    reference: "[Walkthrough] 9 — Dark image card center + coral side cards peeking + nav arrows + neutral text card"
+    nodeId: "85:55977"
+
+  image_carousel_coral_cta:
+    reference: "[Walkthrough] 10 — Horizontal image cards with peek + coral CTA card (text+icon+Login/Skip)"
+    nodeId: "85:55962"
+
+  typography_hero_dark_cta:
+    reference: "[Walkthrough] 11 — Neutral card with big text + subtitle + page dots + dark CTA bar (Login+Skip)"
+    nodeId: "85:55948"
+
+  text_card_top_layered_image:
+    reference: "[Walkthrough] 12 — Dark text+skip card at top + page dots + Layered Card image below"
+    nodeId: "85:55930"
+
+  social_auth_image:
+    reference: "[Walkthrough] 13 — Image card + dark social auth card (Google/Facebook/X) + Create Account/Log In"
+    nodeId: "85:55912"
+
+  image_dark_cta_get_started:
+    reference: "[Walkthrough] 14 — Image card + dark CTA card (headline + Get Started coral button) + Already have account"
+    nodeId: "85:55899"
+
+  cta_bar_typography_hero:
+    reference: "[Walkthrough] 15 — Dark CTA bar (Are you ready? + Get started) + neutral card big text + page dots"
+    nodeId: "85:55886"
+
+  social_auth_full_buttons:
+    reference: "[Walkthrough] 16 — Image card + 3 coral social buttons (full width) + Or + Create Account + Log In"
+    nodeId: "85:55873"
+
+  social_auth_top:
+    reference: "[Walkthrough] 17 — 3 coral social buttons top + Or + Login/SignUp outlined + image card below"
+    nodeId: "85:55859"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  status_bar:
+    description: Always present — Status Bar (Top App Bar Style=Status-Bar)
+    required: true
+
+  hero:
+    description: The main visual focus of the screen — either typography or image
+    options:
+      - typography_hero_neutral: >
+          Neutral card (surfaceNeutral2, r32, pad32) with large display text (36-40px, DM Sans Medium).
+          Text fills most of the card height. Optional DSDivider below text.
+          Below divider: subtitle text (16px, caption opacity 50%).
+          Navigation arrows pill (DSButton, filledC or filledA, icon-only with ← → arrows).
+          Used in: W1, W8, W11, W15.
+      - typography_hero_dark: >
+          Dark card (surfacePrimary100/120, r32, pad32) with large WHITE display text (36-40px).
+          Same structure as neutral but all text is textNeutral0_5.
+          Navigation arrows pill is coral (filledA).
+          Used in: W18.
+      - image_card_single: >
+          Neutral card (surfaceNeutral2, r32) with HD image fill (IMAGE type, scaleMode FILL).
+          Takes 50-65% of screen height. R32 corners clip the image.
+          ALWAYS use real HaHo images — copy fills from reference node.
+          Used in: W13, W14, W16.
+      - image_layered_3: >
+          USE LAYERED CARD COMPONENT (Direction=Bottom, Layers=2) with HD image on front card.
+          Creates depth effect with 2 shadow cards behind. Front=369w, Middle=308w, Back=258w.
+          The component handles the overlap/offset automatically.
+          Used in: W2, W5, W12.
+      - carousel_horizontal: >
+          Horizontal row of image cards with peek effect. Main card takes ~70% width,
+          secondary cards peek from the right edge. All cards r32, surfaceNeutral2 with HD images.
+          Page-Controls dots below the carousel.
+          Used in: W3, W6, W10.
+      - dark_carousel_3: >
+          Dark card center (surfacePrimary100, r32) with HD image.
+          Coral cards (surfaceSecondary100) peeking from left and right edges.
+          Creates a dramatic triptych effect.
+          Used in: W9.
+
+  text_card:
+    description: Text content card with headline and/or subtitle — below or above the hero
+    options:
+      - coral_card: >
+          Coral card (surfaceSecondary100, r32, pad32) with headline text (20-24px medium, dark).
+          Optional subtitle below. DARK text on coral (textNeutral9). NEVER white text on coral.
+          Used in: W2, W5, W10, W18.
+      - dark_card: >
+          Dark card (surfacePrimary100/120, r32, pad32) with headline text (white) + subtitle.
+          Light text (textNeutral0_5). Optional icon or Skip button.
+          Used in: W7, W12, W14.
+      - neutral_card: >
+          Neutral card (surfaceNeutral2, r32, pad32) with headline text (dark).
+          Subtle, minimal. Used when hero provides strong visual.
+          Used in: W6, W9.
+
+  cta_bar:
+    description: Action bar for navigation, skip, login, or get started
+    options:
+      - dark_bar_login_skip: >
+          Dark card (surfacePrimary100/120, r32, pad32) with "Log in" text left + "Skip" coral button right.
+          Full width. Height ~80px.
+          Used in: W7, W11.
+      - dark_bar_get_started: >
+          Dark card with "Are you ready?" text + "Get started" coral button.
+          Used in: W15.
+      - coral_bar_skip: >
+          Coral card (surfaceSecondary100, r32, pad32) with text left + "Skip" dark button right.
+          Used in: W1, W3, W8, W18.
+      - nav_arrows_pill: >
+          DSButton pill (filledC or filledA, r360) with ← → arrow icons. Centered.
+          Used for page navigation instead of swipe.
+          Used in: W1, W5, W8, W18.
+      - social_auth_card: >
+          Dark card with "Continue with:" headline + 3 social buttons (Google/Facebook/X).
+          Social buttons: DSButton Neutral with brand icon INSTANCE_SWAP.
+          Below card: "Create an Account? Sign Up" + "Already have an account? Log In".
+          Used in: W13.
+      - social_auth_buttons: >
+          3 full-width coral buttons: "Continue with Google/Facebook/X" (filledA, Big) with brand icon right.
+          Below: "Or" centered text + outlined "Create an Account?" + "Already have account? Log In".
+          Social icon IDs: google=85:34182, facebook=85:35004, x=85:35009.
+          Used in: W16, W17.
+      - coral_cta_get_started: >
+          Dark card with headline + coral full-width CTA button "Get started now" (filledA, Big, isFullWidth).
+          Below card: "Already have an account? Log In" text.
+          Used in: W14.
+
+  page_controls:
+    description: Page indicator dots showing current page position
+    placement: >
+      Centered horizontally. Can appear:
+      - Between hero and text card (most common)
+      - Below the text card
+      - Inside the hero card
+    component: Page-Controls instance with layoutAlign=CENTER
+    note: >
+      If layoutAlign=CENTER doesn't work on the instance directly, wrap in a FILL-width frame
+      with primaryAxisAlignItems=CENTER.
+
+  home_indicator:
+    description: Always present — Home Indicator (Top App Bar Style=Home Indicator, 32px)
+    required: true
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  typography_first:
+    description: "Big bold text dominates the screen — text IS the hero"
+    zones: [status_bar, hero(typography), nav_arrows_pill, cta_bar(dark/coral), home_indicator]
+    structure: >
+      Status Bar → Neutral/Dark Card (r32, pad32, layoutGrow=1) containing:
+        Large display text (36-40px, DM Sans Medium)
+        DSDivider (optional)
+        Subtitle text (16px, 50% opacity)
+        Nav arrows pill (DSButton filledC/filledA, icon-only ← →)
+      → CTA bar (dark or coral, r32, pad32) with text + Skip/action button
+      → Home Indicator
+    spacing:
+      screen_gap: 12px
+      card_padding: 32px all sides
+      text_to_divider: 32px
+      divider_to_subtitle: 32px
+    best_for: First onboarding screen, brand statement, manifesto pages
+    references: [W1, W8, W11, W15, W18]
+
+  image_with_text_card:
+    description: "Large image hero + text card below (with optional Layered Card depth)"
+    zones: [status_bar, hero(image), page_controls, text_card, home_indicator]
+    structure: >
+      Status Bar → Layered Card or single image card (r32, HD image fill, 50-65% height)
+      → Page-Controls (centered)
+      → Text card (coral/dark/neutral, r32, pad32) with headline + optional subtitle
+      → Home Indicator
+    spacing:
+      screen_gap: 12-16px
+      image_height: 400-500px
+    best_for: Feature showcase, emotional storytelling, product preview
+    references: [W2, W5, W6, W12, W14]
+
+  carousel_gallery:
+    description: "Horizontal image carousel with peek effect + text below"
+    zones: [status_bar, hero(carousel), page_controls, text_card, home_indicator]
+    structure: >
+      Status Bar → Horizontal frame (HORIZONTAL layout) with:
+        Main image card (70-80% width, r32, HD image)
+        1-2 peek cards (partially visible, r32, different HD images)
+      → Page-Controls (centered)
+      → Text card (coral/dark/neutral, r32, pad32)
+      → Home Indicator
+    spacing:
+      carousel_gap: 12px between cards
+    best_for: Multi-feature showcase, portfolio preview
+    references: [W3, W6, W9, W10]
+
+  accordion_steps:
+    description: "Numbered step cards stacked with overlap — progressive disclosure"
+    zones: [status_bar, steps(overlapping_cards_component), hero(image), home_indicator]
+    structure: >
+      Status Bar → Content frame containing:
+        Overlapping Cards component (Cards=3, Overlap=Small) — detach and customize:
+          Card 1: coral (surfaceSecondary100) with "01" + description + icon
+          Card 2: dark (surfacePrimary100) with "02" + description + icon (white text)
+          Card 3: darker (surfacePrimary120) with "03" + description + icon (white text)
+        Image card (r32, HD image, takes remaining space)
+      → Home Indicator
+    spacing:
+      step_overlap: -50px (built into Overlapping Cards component)
+      steps_to_image: 12px
+    best_for: How-it-works, setup wizard, feature steps
+    references: [W4]
+
+  cta_first:
+    description: "CTA bar at top with actions, hero content below"
+    zones: [status_bar, cta_bar(top), hero(image/text), page_controls, home_indicator]
+    structure: >
+      Status Bar → CTA bar at top (coral or dark, r32, pad32) with text + action buttons
+      → Image card or text card (hero, r32)
+      → Page-Controls (centered)
+      → Home Indicator
+    best_for: Last onboarding screen before login, conversion-focused
+    references: [W7, W15, W17]
+
+  social_auth:
+    description: "Image hero + social login buttons — onboarding that leads directly to auth"
+    zones: [status_bar, hero(image), social_buttons, auth_links, home_indicator]
+    structure: >
+      Status Bar → Image card (r32, HD image, 50-60% height)
+      → Social auth section:
+        Option A: Dark card with "Continue with:" + 3 neutral icon buttons (W13)
+        Option B: 3 full-width coral buttons "Continue with Google/Facebook/X" (W16)
+        Option C: 3 coral buttons at top + "Or" + outlined Login/SignUp (W17)
+      → "Create Account?" / "Already have account? Log In" text links
+      → Home Indicator
+    spacing:
+      button_gap: 12px between social buttons
+      or_separator: 24px margin above and below "Or" text
+    best_for: Last walkthrough screen, direct-to-auth onboarding
+    references: [W13, W16, W17]
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - ALWAYS use real HD images from HaHo — find the reference screen's image node, copy its fills (IMAGE type with imageHash). NEVER use grey "Image Placeholder" frames.
+  - ALWAYS use Layered Card COMPONENT for depth effects — NEVER manually stack frames with offset.
+  - ALWAYS use Overlapping Cards COMPONENT for accordion/step patterns — NEVER manually create negative-gap frames.
+  - ALWAYS use Page-Controls COMPONENT for dots — centered horizontally.
+  - Typography hero text uses DM Sans Medium at 36-40px — the ONE place where large text is acceptable.
+  - Subtitle text below divider uses caption (14px medium) at 50% opacity.
+  - Navigation arrows: DSButton (filledC or filledA, r360) with arrow-left-long (85:21860) and arrow-right-long (85:21858) icons, icon-only (Text=false).
+  - Skip button: DSButton (filledA, Medium) with "Skip" text — coral pill.
+  - Dark cards use textNeutral0_5 (light/white) for ALL text and icons.
+  - Coral cards use textNeutral9 (dark) for ALL text and icons — NEVER white on coral.
+  - Page background ALWAYS surfaceNeutral0_5 (rgb 250,250,249) — NEVER change it.
+  - Screen padding: padL=12, padR=12, padB=12, padT=0.
+  - Card padding: 32px on all sides consistently.
+  - Card radius: 32 (xl) for all content cards.
+  - Social buttons: DSButton with brand icon INSTANCE_SWAP. Icon IDs: google=85:34182, facebook=85:35004, x=85:35009.
+  - DSDivider between headline and subtitle is optional — used in typography hero layouts.
+  - Home Indicator always present, always last child, always FILL width.
+  - Screens should feel spacious — generous whitespace between zones.
+
+# ─── VISUAL TECHNIQUES ──────────────────────────────────────────────────────
+
+visual_techniques:
+  layered_depth: >
+    Use the Layered Card component (Direction=Bottom, Layers=2) for image heroes.
+    Creates 3 cards: front (369w, full image), middle (308w, neutral), back (258w, neutral darker).
+    The depth effect makes the image feel premium and three-dimensional.
+    Component key: c463fd01b3f4f25634206a9a94b9a2eb3708b9bd, nodeId: 88:137815.
+    Used in W2, W5, W12.
+
+  horizontal_peek: >
+    Show the main image card at ~70-80% width with secondary cards peeking from the right edge.
+    The peek creates curiosity and suggests swipeable content.
+    Main card: full height, r32. Peek cards: same height, r32, 50-70% width visible.
+    Used in W3, W6, W10.
+
+  color_cascade: >
+    Stack cards with different background colors for visual rhythm:
+    - coral (surfaceSecondary100) for the top/active/highlighted card
+    - dark (surfacePrimary100) for secondary cards
+    - neutral (surfaceNeutral2) for tertiary cards
+    Use the Overlapping Cards component. The cascade creates visual hierarchy through color alone.
+    Used in W4 (steps), W7 (CTA+image), W9 (triptych).
+
+  triptych_carousel: >
+    Center a dark image card with coral cards peeking from both left and right sides.
+    The three-panel effect is dramatic and cinematic.
+    Center card: dark bg (surfacePrimary100/120), r32, HD image.
+    Side cards: coral (surfaceSecondary100), r32, different HD images, partially visible.
+    Used in W9.
+
+  cta_bar_patterns: >
+    Bottom CTA bars come in several flavors:
+    1. Dark bar: surfacePrimary100/120, r32, "Log in" left + "Skip" coral pill right
+    2. Coral bar: surfaceSecondary100, r32, subtitle text + "Skip" dark pill
+    3. Get started: dark card, headline + full-width coral CTA button
+    4. Social: dark card, "Continue with:" + 3 brand icon buttons
+    Each creates a different conversion path.
+
+# ─── FIGMA IMPLEMENTATION ──────────────────────────────────────────────────────
+
+figma_implementation:
+  image_fills: >
+    To use HaHo HD images: find the reference screen's image frame,
+    read its fills (which contain IMAGE type with imageHash),
+    copy via: targetFrame.fills = JSON.parse(JSON.stringify(sourceFrame.fills)).
+    The image stays in the Figma file's asset cache — no external download needed.
+
+  layered_card: >
+    Instantiate the Layered Card component (key: c463fd01b3f4f25634206a9a94b9a2eb3708b9bd, nodeId: 88:137815).
+    Variants: Direction=Bottom/Top/Top-Right/Right, Layers=1/2.
+    For walkthrough: use Direction=Bottom, Layers=2 for maximum depth.
+    After instantiation, detach and set the front card's fills to the desired HD image.
+
+  overlapping_cards: >
+    Instantiate the Overlapping Cards component (key: 38abc1bd1e98d627fecafe4d7f3eec2853528fbb, nodeId: 88:152411).
+    Variants: Cards=2/3/5, Overlap=Small(-50)/Medium(-85)/Large(-132).
+    For walkthrough steps: use Cards=3, Overlap=Small.
+    After instantiation, detach and set each card's fill color and add text content.
+
+  page_controls: >
+    Instantiate Page-Controls component. Set layoutAlign=CENTER.
+    If centering doesn't work on the instance directly, wrap in a FILL-width frame
+    with primaryAxisAlignItems=CENTER.
+
+  content_principles: >
+    Walkthrough content should tell a STORY specific to the app:
+    - Screen 1: Brand promise / value proposition (big bold text or hero image)
+    - Screen 2: Key feature #1 (image + explanation)
+    - Screen 3: Key feature #2 or social proof (carousel or stats)
+    - Screen 4 (last): CTA to get started / sign up / social auth
+    Adapt the content to what the specific app DOES — never use generic design jargon.
+    A video app talks about memories, a shopping app talks about deals, a chat app talks about connections.

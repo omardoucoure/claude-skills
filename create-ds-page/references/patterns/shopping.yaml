@@ -1,0 +1,255 @@
+pattern: shopping
+description: E-commerce start pages, category overviews, single category product grids, product detail pages, and filter/sort screens
+source: HaHo Design System — 29 shopping screen variants analyzed (5 start + 4 categories overview + 7 single category + 9 detail + 4 filter)
+figma_references:
+  # ─── START / HOME ────────────────────────────────────────────────────────────
+  start_hero_promo:
+    reference: "[Shopping] Start - 1 — Hero promo card (80% off) + page dots + New Arrivals grid + bottom nav"
+    nodeId: "85:49247"
+  start_categories_carousel:
+    reference: "[Shopping] Start - 2 — Category chips + hero card + trending items carousel"
+    nodeId: "85:49170"
+  start_featured_grid:
+    reference: "[Shopping] Start - 3 — Search + promo banner + featured products 2-column grid"
+    nodeId: "85:49098"
+  start_dark_promo:
+    reference: "[Shopping] Start - 4 — Dark promo card + category icons + product cards"
+    nodeId: "85:49031"
+  start_minimal:
+    reference: "[Shopping] Start - 5 — Greeting + chips + promo + product grid with prices"
+    nodeId: "85:48981"
+
+  # ─── CATEGORIES OVERVIEW ─────────────────────────────────────────────────────
+  categories_search_image:
+    reference: "[Shopping] Categories Overview - 1 — Search bar + hero image + category list (name + count + icon)"
+    nodeId: "85:48946"
+  categories_grid_images:
+    reference: "[Shopping] Categories Overview - 2 — Search + 2-column category image grid + promo banner"
+    nodeId: "85:48890"
+  categories_cards:
+    reference: "[Shopping] Categories Overview - 3 — Category cards stacked with images + item counts"
+    nodeId: "85:48861"
+  categories_minimal:
+    reference: "[Shopping] Categories Overview - 4 — Clean category list with icons + counts"
+    nodeId: "85:48806"
+
+  # ─── SINGLE CATEGORY ─────────────────────────────────────────────────────────
+  single_category_grid_2col:
+    reference: "[Shopping] Single Category - 1 — Filter chips + 2-column product grid (image + name + price + discount)"
+    nodeId: "85:48723"
+  single_category_list:
+    reference: "[Shopping] Single Category - 2 — Product list rows (image + name + price)"
+    nodeId: "85:48646"
+  single_category_large_cards:
+    reference: "[Shopping] Single Category - 3 — Large product cards with ratings"
+    nodeId: "85:48577"
+  single_category_compact:
+    reference: "[Shopping] Single Category - 4 — Compact 2-column grid with minimal info"
+    nodeId: "85:48517"
+  single_category_horizontal:
+    reference: "[Shopping] Single Category - 5 — Horizontal scrolling product cards"
+    nodeId: "85:48481"
+  single_category_dark:
+    reference: "[Shopping] Single Category - 6 — Dark background product grid"
+    nodeId: "85:48446"
+  single_category_minimal:
+    reference: "[Shopping] Single Category - 7 — Minimal grid with heart favorites"
+    nodeId: "85:48364"
+
+  # ─── DETAIL PAGES ────────────────────────────────────────────────────────────
+  detail_tabs_specs:
+    reference: "[Shopping] Detail Page - 1 — Product image carousel + name + price + discount + tabs (Details/Composition/Shipping) + Add to Cart"
+    nodeId: "85:48219"
+  detail_colors_sizes:
+    reference: "[Shopping] Detail Page - 2 — Product image + color swatches + size selector + reviews + Add to Cart"
+    nodeId: "85:48174"
+  detail_minimal:
+    reference: "[Shopping] Detail Page - 3 — Clean product detail with description + CTA"
+    nodeId: "85:48141"
+  detail_gallery:
+    reference: "[Shopping] Detail Page - 4 — Product gallery + specs list"
+    nodeId: "85:48112"
+  detail_hero_image:
+    reference: "[Shopping] Detail Page - 5 — Full-width hero image + details below"
+    nodeId: "85:48103"
+  detail_dark_card:
+    reference: "[Shopping] Detail Page - 6 — Dark info card overlapping product image"
+    nodeId: "85:48066"
+  detail_carousel_reviews:
+    reference: "[Shopping] Detail Page - 7 — Image carousel + star reviews + size chips"
+    nodeId: "85:48028"
+  detail_compact:
+    reference: "[Shopping] Detail Page - 8 — Compact layout with inline specs"
+    nodeId: "85:47996"
+  detail_full:
+    reference: "[Shopping] Detail Page - 9 — Full product page with all elements"
+    nodeId: "85:47975"
+
+  # ─── FILTER / SORT ───────────────────────────────────────────────────────────
+  filter_full:
+    reference: "[Shopping] Filter - 1 — Filter by (chips) + Category/Brand/Color/Size/Price Range/Reviews rows + Show Results CTA"
+    nodeId: "85:48325"
+  filter_compact:
+    reference: "[Shopping] Filter - 2 — Compact filter with dropdowns"
+    nodeId: "85:48303"
+  filter_dark:
+    reference: "[Shopping] Filter - 3 — Dark background filter panel"
+    nodeId: "85:48271"
+  filter_bottom_sheet:
+    reference: "[Shopping] Filter - 4 — Bottom sheet filter overlay"
+    nodeId: "85:48251"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    start: "Greeting ('Hello Hristo') or brand name + search/cart/profile icons"
+    categories: "Back arrow + 'Categories' title + search/cart icons"
+    single_category: "Back arrow + category name ('Shoes') + filter/sort/grid icons"
+    detail: "Back arrow + product category ('Sneakers') + share/favorite icons"
+    filter: "X close + 'Filter by' title + 'Clear' text button"
+
+  hero_section:
+    description: Promotional hero area at top of start/category screens
+    options:
+      - promo_card: >
+          Large rounded card (surfaceNeutral2, r32) with promotional text
+          (e.g., '80% off'), subtitle ('Orders over $200'), and visual elements
+          (bar chart, arrow icon). Page dots (DSPageControl) below for carousel.
+      - hero_image: >
+          Large product/lifestyle image (r32) with overlay text and filter chip.
+          Used in category overviews for visual browsing entry.
+      - category_chips: >
+          Horizontal scrolling chip row (DSChip) for quick category filtering.
+          Active chip = filled dark, inactive = outlined neutral.
+
+  product_grid:
+    description: Product listing in grid or list format
+    structure: >
+      2-column grid of product cards. Each card:
+      - Product image (r16, square or portrait aspect)
+      - Heart/favorite icon overlay (top-right)
+      - Product name (bodySemiBold or body)
+      - Subtitle/description (caption, 60% opacity)
+      - Price row: current price (bodySemiBold) + original price (caption, strikethrough) + discount badge (DSBadge, coral)
+    variants:
+      - grid_2col: "Standard 2-column grid, 12px gap, each card is DSCard(surfaceNeutral2, r16)"
+      - grid_large: "2-column but taller cards with more product detail"
+      - list_rows: "Full-width rows with image left + details right"
+      - horizontal_scroll: "Horizontally scrolling product cards"
+
+  product_detail:
+    description: Single product information display
+    structure: >
+      Top: Product image carousel (DSCarousel or paged images with DSPageControl).
+      Info section: Product name (h4 24px), subtitle (caption), price + discount.
+      Options: Color swatches (circle buttons), size chips (DSChip).
+      Tabs: Details / Composition / Shipping (DSSegmentedPicker or tab bar).
+      Description: Body text with bullet points.
+      CTA: 'Add to Cart' DSButton (filledA, Big, isFullWidth) with cart icon.
+    components:
+      - "DSCarousel (for product images)"
+      - "DSPageControl (image carousel dots)"
+      - "DSChip (size/color selection)"
+      - "DSSegmentedPicker (detail tabs)"
+      - "DSBadge (discount percentage)"
+      - "DSButton (Add to Cart CTA)"
+
+  filter_panel:
+    description: Filter and sort controls
+    structure: >
+      Top: Sort chips row (Latest / Low Price / High Price) — DSChip or DSSegmentedPicker.
+      Filter rows: Each is a DSListItem with label + current value + arrow/expand icon.
+      Rows: Category, Brand, Color, Size, Price Range, Customer Reviews.
+      Price range: DSSlider or manual range indicator.
+      Reviews: Star rating selector (1-5 stars).
+      CTA: 'Show N Results' DSButton (filledA, Big, isFullWidth) at bottom.
+
+  cart_indicator:
+    description: Shopping cart badge on navigation
+    structure: "Cart icon with DSBadge count overlay (coral circle with white number)"
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  start_page:
+    description: "Shopping home — greeting + promo + product grid + bottom nav"
+    zones: [top_bar(greeting), hero_section(promo_card), category_chips, product_grid(grid_2col), home_indicator]
+    spacing:
+      hero_to_chips: 16px
+      chips_to_grid: 24px
+      grid_gap: 12px
+    best_for: Main shopping screen, e-commerce home
+
+  categories_overview:
+    description: "Category browsing — search + hero image + category list"
+    zones: [top_bar, search_field, hero_image, category_list, home_indicator]
+    spacing:
+      search_to_hero: 12px
+      hero_to_list: 16px
+      list_gap: 0px (flush rows with dividers)
+    best_for: Category selection, department browsing
+
+  single_category:
+    description: "Product listing — filter chips + result count + product grid"
+    zones: [top_bar(category_name), filter_chips, result_count, product_grid, home_indicator]
+    spacing:
+      chips_to_count: 8px
+      count_to_grid: 16px
+      grid_column_gap: 12px
+      grid_row_gap: 16px
+    best_for: Product browsing within a category
+
+  product_detail:
+    description: "Product page — image carousel + info + options + tabs + CTA"
+    zones: [top_bar, image_carousel, product_info, options_section, detail_tabs, cta_button, home_indicator]
+    spacing:
+      image_to_info: 16px
+      info_to_options: 24px
+      options_to_tabs: 24px
+      tabs_to_content: 16px
+    best_for: Individual product viewing, purchase decision
+
+  filter_sheet:
+    description: "Filter panel — sort chips + filter rows + results CTA"
+    zones: [top_bar(filter_title), sort_chips, filter_rows, results_cta, home_indicator]
+    spacing:
+      chips_to_rows: 24px
+      row_gap: 0px (flush with dividers)
+      rows_to_cta: 24px
+    best_for: Product filtering and sorting
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Product images use r16 corners inside cards, r32 for hero/promo cards
+  - Price display: current price (bodySemiBold, textNeutral9) + original price (caption, strikethrough, 50% opacity) + discount badge (DSBadge coral, e.g., '-40%')
+  - Favorite/heart icon: top-right overlay on product image, DSButton (neutral, small, icon-only)
+  - Filter chips: active = filledC (dark fill, white text), inactive = outlined neutral
+  - Product grid cards: surfaceNeutral2, r16, pad12-16
+  - Hero promo cards: surfaceNeutral2, r32, pad24-32 with large typography (h2 or h4)
+  - Cart badge: coral circle with white count, overlapping cart icon top-right
+  - 'Add to Cart' CTA: DSButton filledA, Big, isFullWidth, with cart-shopping icon
+  - Size chips: DSChip outlined, active = filled dark
+  - Color swatches: 24px circles with actual color fills, selected has border ring
+  - Category list rows: DSListItem with leading icon + headline (category name) + metadata (item count) + trailing arrow
+  - Star ratings: use DS rating component or manual star icons with fill states
+  - Page background ALWAYS surfaceNeutral0_5
+  - Screen padding: padL=12, padR=12
+  - Discount badges use DSBadge with coral background
+  - Product name: body or bodySemiBold (16px), subtitle: caption (14px, 50% opacity)
+  - NEVER use placeholder product images — use real HaHo product photos from reference screens
+
+components:
+  - DSCard (product cards, promo cards, category cards)
+  - DSButton (Add to Cart, favorite, filter actions)
+  - DSChip (filter chips, size selection, category tags)
+  - DSBadge (discount percentage, cart count, item count)
+  - DSSearchField (search bar at top)
+  - DSListItem (category list rows, filter rows)
+  - DSSegmentedPicker (detail tabs, sort options)
+  - DSCarousel (product image carousel)
+  - DSPageControl (carousel indicators)
+  - DSTopAppBar (navigation bar)
+  - DSAvatar (user profile in greeting)
+  - DSDivider (between filter rows, category rows)

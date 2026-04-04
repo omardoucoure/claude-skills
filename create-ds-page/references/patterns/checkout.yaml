@@ -1,0 +1,267 @@
+pattern: checkout
+description: Shopping cart, payment method, shipping address, order review, order confirmation, and checkout flow screens
+source: HaHo Design System — 20 checkout screen variants analyzed (cart + payment + shipping + review + confirmation)
+figma_references:
+  # ─── CART / SHOPPING BAG ─────────────────────────────────────────────────────
+  cart_dark_summary:
+    reference: "[Checkout] 1 — Dark card cart summary ($839) + product list (image+name+price+icons) + coral shipping + checkout CTA"
+    nodeId: "85:47949"
+  cart_with_promo:
+    reference: "[Checkout] 2 — Cart with promo code input + total breakdown"
+    nodeId: "85:47877"
+  cart_editable:
+    reference: "[Checkout] 3 — Editable cart with quantity steppers"
+    nodeId: "85:47844"
+  cart_minimal:
+    reference: "[Checkout] 4 — Minimal cart list with swipe delete"
+    nodeId: "85:47788"
+  cart_promo_code:
+    reference: "[Checkout] 5 — Shopping Bag (4) + product list + Promo Code card + dark summary footer + Checkout CTA"
+    nodeId: "85:47766"
+
+  # ─── PAYMENT ────────────────────────────────────────────────────────────────
+  payment_card_form:
+    reference: "[Checkout] 6 — Payment card form (card number + expiry + CVV) + saved cards"
+    nodeId: "85:47737"
+  payment_methods:
+    reference: "[Checkout] 7 — Payment method selection (Card/PayPal/ApplePay)"
+    nodeId: "85:47710"
+  payment_saved_cards:
+    reference: "[Checkout] 8 — Saved cards carousel + add new card"
+    nodeId: "85:47676"
+  payment_stepper:
+    reference: "[Checkout] 9 — Checkout stepper (Shipping/Payment/Review) + Payment Method form + card inputs + Continue to Payment CTA"
+    nodeId: "85:47631"
+  payment_dark:
+    reference: "[Checkout] 10 — Dark payment card with form below"
+    nodeId: "85:47598"
+
+  # ─── SHIPPING / ADDRESS ─────────────────────────────────────────────────────
+  shipping_form:
+    reference: "[Checkout] 11 — Shipping address form (country, name, address, phone, email)"
+    nodeId: "85:47583"
+  shipping_saved:
+    reference: "[Checkout] 12 — Saved addresses with edit/delete + add new"
+    nodeId: "85:41389"
+  shipping_methods:
+    reference: "[Checkout] 13 — Delivery method selection (Standard/Express/Same Day)"
+    nodeId: "85:41361"
+  address_form:
+    reference: "[Checkout] 14 — Change Address form (Country/Name/Address/Postal/Phone/Email) + Change Address CTA"
+    nodeId: "85:41343"
+
+  # ─── ORDER REVIEW ───────────────────────────────────────────────────────────
+  review_summary:
+    reference: "[Checkout] 15 — Order review with items + shipping + payment summary"
+    nodeId: "85:41325"
+  review_card_shipping:
+    reference: "[Checkout] 16 — Checkout with coral credit card + Personal info + shipping address + delivery + Cart summary + Place Order CTA"
+    nodeId: "85:41287"
+  review_dark:
+    reference: "[Checkout] 17 — Dark theme order review"
+    nodeId: "85:41248"
+
+  # ─── CONFIRMATION ───────────────────────────────────────────────────────────
+  confirmation_success:
+    reference: "[Checkout] 18 — Order confirmed with checkmark + order number + track CTA"
+    nodeId: "85:41217"
+  confirmation_details:
+    reference: "[Checkout] 19 — Detailed confirmation with delivery estimate"
+    nodeId: "85:41163"
+  confirmation_minimal:
+    reference: "[Checkout] 20 — Minimal success screen"
+    nodeId: "85:41150"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    cart: "Back arrow + 'Cart summary' / 'Shopping Bag (4)' + settings icon"
+    payment: "X close + 'Checkout' + stepper progress (Shipping/Payment/Review)"
+    address: "Back arrow + 'Change Address' + more icon"
+    confirmation: "Minimal or hidden — success screen"
+
+  checkout_stepper:
+    description: Multi-step progress indicator
+    structure: >
+      3-step progress bar: Shipping → Payment → Review.
+      Each step: circle icon (checkmark for completed, number for current, empty for upcoming)
+      + label below. Active step = dark/coral fill, completed = checkmark, upcoming = neutral.
+      Connected by thin lines between circles.
+    components:
+      - "Step circles with icons (checkmark, payment, review)"
+      - "Connecting lines between steps"
+      - "Step labels below circles"
+
+  cart_items:
+    description: Product list in cart
+    structure: >
+      Each item: DSListItem or custom row with:
+      - Product thumbnail (48px, r8)
+      - Product name (bodySemiBold) + subtitle (caption)
+      - Price (bodySemiBold, right-aligned)
+      - Action icons: heart/favorite, delete/trash
+      Optional: quantity stepper (- count +), swipe to delete.
+    components:
+      - "DSListItem (cart item rows)"
+      - "DSButton (favorite, delete actions)"
+      - "Product thumbnail images"
+
+  promo_code:
+    description: Promotional code input section
+    structure: >
+      DSCard (surfaceNeutral2, r32, pad16-24) containing:
+      - 'Promo Code' label + info icon
+      - DSTextField with placeholder 'HKM121323'
+      - 'Apply' DSButton (filledA or outlined, small) right-aligned
+    components:
+      - "DSTextField (promo code input)"
+      - "DSButton (Apply action)"
+
+  payment_form:
+    description: Credit card input form
+    structure: >
+      Payment method selector: Card / PayPal / Apple Pay (DSSegmentedPicker or radio buttons).
+      Card fields: DSTextField instances for:
+      - Name on Card
+      - Card Number (1234 5678 9012 3456) + card brand icon
+      - Expiration Date (12/34) + CVV (826) side by side
+      Checkboxes: 'Billing same as Shipping Address', 'Save my Payment Information'.
+    components:
+      - "DSTextField (card number, expiry, CVV, name)"
+      - "DSCheckbox (billing address, save card)"
+      - "DSRadio (payment method selection)"
+      - "DSButton (Continue to Payment CTA)"
+
+  credit_card_display:
+    description: Visual credit card representation
+    structure: >
+      Coral card (surfaceSecondary100, r32, pad24) showing:
+      - Card brand chip icon (top-left)
+      - 'Personal' label + card type icon
+      - Masked card number (•••• •••• •••• 2345)
+      - Full card number row
+      - VISA/Mastercard logo (bottom-right)
+    note: This is a visual representation, not an input form.
+
+  shipping_form:
+    description: Address input form
+    structure: >
+      DSCard (surfaceNeutral2, r32, pad24-32) containing stacked DSTextField instances:
+      - Country (with dropdown icon)
+      - Full Name
+      - Street Address
+      - Postal Code + City (side by side, 50% width each)
+      - Phone Number
+      - Email
+      CTA: 'Change Address →' DSButton (filledA, Big, isFullWidth)
+    components:
+      - "DSTextField (all address fields)"
+      - "DSDropdown (country selector)"
+      - "DSButton (submit CTA)"
+
+  order_summary:
+    description: Price breakdown footer
+    structure: >
+      Dark card (surfacePrimary100/120, r32) or coral accent section:
+      - 'Cart summary' label + total price (h4 24px, white)
+      - Subtotal / Shipping / Tax breakdown rows (body, white, 60% opacity)
+      - 'Checkout' DSButton (filledA, Big, isFullWidth) with cart icon
+      Or: coral bar with 'Estimated shipping and handling' + price.
+    options:
+      - dark_footer: "Dark card pinned to bottom with total + Checkout CTA"
+      - inline_breakdown: "Price rows inline above CTA button"
+      - coral_accent: "Coral bar for shipping cost highlight"
+
+  delivery_info:
+    description: Shipping method and delivery details
+    structure: >
+      DSListItem rows: Shipping Address (icon + address text + edit icon),
+      Delivery method (DHL Express / Standard / Same Day + price + edit icon).
+      Each row has leading icon + details + trailing edit button.
+
+  confirmation_content:
+    description: Order success display
+    structure: >
+      Centered layout:
+      - Large checkmark icon (56px, coral or dark circle)
+      - 'Order Confirmed!' headline (h4 24px)
+      - Order number + estimated delivery (body)
+      - 'Track Order' DSButton (filledA, Big) + 'Continue Shopping' DSButton (outlined)
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  cart_page:
+    description: "Shopping cart — product list + promo code + total summary + checkout CTA"
+    zones: [top_bar, cart_items(scrollable), promo_code, order_summary(dark_footer)]
+    spacing:
+      items_gap: 0px (flush rows with dividers)
+      items_to_promo: 16px
+      promo_to_summary: 16px
+    best_for: Cart review before checkout
+
+  payment_page:
+    description: "Payment — stepper + payment form + card display + continue CTA"
+    zones: [top_bar, checkout_stepper, payment_form, credit_card_display, cta_button]
+    spacing:
+      stepper_to_form: 24px
+      form_field_gap: 16px
+    best_for: Payment information entry
+
+  address_page:
+    description: "Address form — title + address fields + submit CTA"
+    zones: [top_bar, address_header, shipping_form, cta_button]
+    spacing:
+      header_to_form: 16px
+      form_field_gap: 12px
+    best_for: Shipping address entry/editing
+
+  review_page:
+    description: "Order review — card display + shipping + delivery + cart summary + Place Order"
+    zones: [top_bar, credit_card_display, delivery_info, order_summary, place_order_cta]
+    spacing:
+      card_to_info: 16px
+      info_to_summary: 16px
+    best_for: Final order review before placing
+
+  confirmation_page:
+    description: "Success — checkmark + order details + action buttons"
+    zones: [confirmation_content(centered), action_buttons]
+    best_for: Order confirmation, success state
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Cart item rows use product thumbnails (48px, r8) with name + price + action icons
+  - Price display: current price bold (bodySemiBold), always right-aligned in cart rows
+  - Dark summary card at bottom with white text: 'Cart summary' + total price (h4)
+  - Checkout CTA: DSButton filledA, Big, isFullWidth, with cart-shopping icon — always coral/primary
+  - Stepper progress: 3 circles connected by lines, active = dark/coral fill, completed = checkmark
+  - Payment form inputs: DSTextField lined variant for clean look, or filled variant inside neutral card
+  - Credit card display: coral card (surfaceSecondary100, r32) with masked number + brand logo
+  - Card number masking: show full or last 4 digits only, NEVER expose full number in UI
+  - Address form: stacked DSTextField instances, Postal Code + City side by side (50/50 width)
+  - Promo code: DSTextField + 'Apply' pill button in a neutral card
+  - 'Place Order' CTA: DSButton filledA, Big, isFullWidth — the final conversion action
+  - Checkboxes for 'Save card' and 'Billing = Shipping' — use DSCheckbox
+  - Delivery method rows: DSListItem with icon + method name + price + optional 'free' badge
+  - Order confirmation: centered checkmark icon + headline + details — celebratory but clean
+  - Page background ALWAYS surfaceNeutral0_5
+  - Screen padding: padL=12, padR=12
+  - Dark footer card overlaps content slightly for visual depth
+  - Input field labels: caption (14px) above the input, or floating label style
+
+components:
+  - DSCard (cart container, promo code card, summary card, credit card display)
+  - DSTextField (card number, expiry, CVV, address fields, promo code)
+  - DSButton (Checkout, Apply, Place Order, Track Order, Continue Shopping)
+  - DSListItem (cart items, delivery info rows, order summary rows)
+  - DSCheckbox (save card, billing same as shipping, terms)
+  - DSSegmentedPicker (payment method tabs)
+  - DSRadio (delivery method selection)
+  - DSDropdown (country selector)
+  - DSBadge (item count, promo applied)
+  - DSTopAppBar (navigation)
+  - DSDivider (between cart items, between info sections)
+  - DSProgressCircle (checkout stepper — custom usage)

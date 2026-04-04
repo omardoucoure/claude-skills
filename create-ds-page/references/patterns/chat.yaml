@@ -1,0 +1,190 @@
+pattern: chat
+description: Chat overview, individual/group messaging, video calls, voice calls, and conversation screens
+source: HaHo Design System — 23 chat screen variants analyzed (8 overview + 6 individual + 4 group + 2 video + 3 voice)
+figma_references:
+  # OVERVIEW (conversation list)
+  overview_stats_list:
+    reference: "[Chat] Overview - 1 — Stats card (126 messages + progress circle) + conversation list (avatar+name+preview+time+arrow)"
+    nodeId: "85:52503"
+  overview_contacts_list:
+    reference: "[Chat] Overview - 2 — Horizontal contact avatars + conversation cards (name+preview+time)"
+    nodeId: "85:52465"
+  overview_dark_contacts:
+    reference: "[Chat] Overview - 3 — Dark contacts bar (search+avatars) + conversation list with unread badges + swipe delete"
+    nodeId: "85:52382"
+  overview_friends_frequent:
+    reference: "[Chat] Overview - 4 — Friends Update (image cards carousel) + Frequent Contacts (avatars+Live) + conversations"
+    nodeId: "85:52299"
+  overview_tabs_list:
+    reference: "[Chat] Overview - 5 — Segmented tabs (All/Read/Unread) + clean conversation list with dividers"
+    nodeId: "85:52263"
+  overview_updates_dark_messages:
+    reference: "[Chat] Overview - 6 — Friends Update (photo row) + Frequent Contacts (small avatars) + dark message cards"
+    nodeId: "85:52218"
+  overview_active_list:
+    reference: "[Chat] Overview - 7 — 'Active Now' dark card with avatars (Live/badge) + conversation list"
+    nodeId: "85:52147"
+  overview_updates_contacts:
+    reference: "[Chat] Overview - 8 — Friends Update (image cards) + Frequent Contacts (avatars+green dot) + message list"
+    nodeId: "85:52103"
+
+  # INDIVIDUAL CHAT
+  individual_bubbles_1:
+    reference: "[Chat] Individual - 1 — Message bubbles (neutral=received, coral=sent) + images + input bar (type+voice+send)"
+    nodeId: "85:52058"
+  individual_bubbles_2:
+    reference: "[Chat] Individual - 2 — Bubbles + image message + voice message (play+waveform+duration) + input bar (sticker+camera+voice)"
+    nodeId: "85:51994"
+  individual_bubbles_3:
+    reference: "[Chat] Individual - 3 — Narrower bubble layout + image message + input bar (sticker+camera+voice)"
+    nodeId: "85:51948"
+  individual_dark_bubbles:
+    reference: "[Chat] Individual - 4 — Dark background + white/coral bubbles + image messages"
+    nodeId: "85:51889"
+  individual_dark_media:
+    reference: "[Chat] Individual - 5 — Dark bg + media messages (images, voice) + dark input bar"
+    nodeId: "85:51842"
+  individual_dark_round:
+    reference: "[Chat] Individual - 6 — Dark bg + rounded bubble cards + image messages"
+    nodeId: "85:51788"
+
+  # GROUP CHAT
+  group_chat_1:
+    reference: "[Chat] Group - 1 — Group name (30 members) + avatar stack + messages + video thumbnail (play button) + input bar"
+    nodeId: "85:51737"
+  group_chat_2:
+    reference: "[Chat] Group - 2 — Group avatars + messages with sender names + voice messages"
+    nodeId: "85:51686"
+  group_chat_3:
+    reference: "[Chat] Group - 3 — Compact group + dark message bubbles variant"
+    nodeId: "85:51633"
+  group_chat_4:
+    reference: "[Chat] Group - 4 — Group with image sharing + reactions"
+    nodeId: "85:51581"
+
+  # VIDEO CALL
+  video_call_1:
+    reference: "[Chat] Video Call - 1 — Full-screen video (remote) + floating PiP (self) + call controls (grid+camera-off+emoji)"
+    nodeId: "85:52554"
+  video_call_2:
+    reference: "[Chat] Video Call - 2 — Video call variant with different controls"
+    nodeId: "85:52539"
+
+  # VOICE CALLING
+  voice_calling_1:
+    reference: "[Chat] Voice Calling - 1 — Full-screen image bg + dark controls card (Add/Speaker/Keypad/Chat/Video/Mute) + coral 'End call'"
+    nodeId: "85:51548"
+  voice_calling_2:
+    reference: "[Chat] Voice Calling - 2 — Voice call variant"
+    nodeId: "85:51504"
+  voice_calling_3:
+    reference: "[Chat] Voice Calling - 3 — Voice call variant"
+    nodeId: "85:51470"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    overview: "Back arrow + 'Conversations' title + compose/search/add icon"
+    individual: "Grid icon + contact name + video call icon + more (⋮)"
+    group: "Back arrow + group name (member count) + video call icon + more"
+    video_call: "Back arrow + contact name + duration + settings icon"
+    voice_call: "Status bar overlaying full-screen image"
+
+  contacts_section:
+    description: Horizontal scrollable section at top of overview
+    options:
+      - avatar_row: "Circle avatars (56px) with names below. Live badge (coral), notification count. Search icon first."
+      - friends_update: "Square image cards (r16) with name overlay. Scrolls horizontally."
+      - frequent_contacts: "Small avatars (40px) with online indicator (green dot). No names."
+      - active_now: "Dark card (surfacePrimary100) with 'Active Now' + 'View all' + avatar row."
+
+  conversation_list:
+    description: List of chat conversations
+    structure: >
+      Each row: DSListItem-style with avatar (48px circle) + name (bodySemiBold) + message preview (body, truncated) + time (caption, right).
+      Optional: unread count badge (DSBadge, coral), swipe-to-delete, dividers.
+    variants:
+      - card_rows: "Each conversation in its own card (surfaceNeutral2, r32, pad16). Used in: O2, O4."
+      - flat_list: "Conversations as flat rows with dividers. No card wrapper. Used in: O5, O7."
+      - dark_rows: "Dark card rows (surfacePrimary100) with white text. Used in: O6."
+
+  message_bubbles:
+    description: Chat message display
+    structure: >
+      Received messages: neutral bg (surfaceNeutral2, r24) aligned LEFT with sender avatar.
+      Sent messages: coral bg (surfaceSecondary100, r24) aligned RIGHT with own avatar.
+      Time stamp: small (12px) below bubble. Double check (✓✓) for delivered.
+    content_types:
+      - text: "Plain text message in bubble"
+      - image: "Image (r16) inside or below bubble"
+      - voice: "Play button + waveform visualization + duration (0:47)"
+      - video: "Video thumbnail with coral play button overlay"
+
+  input_bar:
+    description: Message composition bar at bottom
+    structure: >
+      Neutral frame (surfaceNeutral2, r360): "Type a message..." placeholder + action icons.
+      Left actions: sticker (@), camera icon.
+      Right actions: voice (microphone) icon, send (paper plane, coral) button.
+      Send button: DSButton filledA, r360, icon-only.
+
+  call_controls:
+    description: Video/voice call action buttons
+    structure: >
+      6 action buttons in 2×3 grid: Add to call, Speaker, Keypad, Chat, Video call, Mute.
+      Each button: dark circle (surfacePrimary100/120, r360) with white icon + label below.
+      End call: coral pill button (filledA, Big) "End call" + phone icon.
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  overview_contacts_messages:
+    description: "Contact section at top + conversation list below"
+    zones: [top_bar, contacts_section, conversation_list, home_indicator]
+    best_for: Main chat screen, messaging hub
+    references: [O1-O8]
+
+  individual_conversation:
+    description: "Top bar + scrollable message bubbles + input bar at bottom"
+    zones: [top_bar, message_bubbles(scrollable), input_bar(pinned_bottom), home_indicator]
+    best_for: 1-on-1 chat conversation
+    references: [Individual 1-6]
+
+  group_conversation:
+    description: "Top bar with group info + avatar stack + messages + input bar"
+    zones: [top_bar(group_name+members), avatar_stack, message_bubbles, input_bar, home_indicator]
+    best_for: Group chat
+    references: [Group 1-4]
+
+  video_call:
+    description: "Full-screen remote video + floating PiP self-view + call controls"
+    zones: [top_bar(overlay), remote_video(fullscreen), pip_self(floating), call_controls(bottom)]
+    best_for: Video calling
+    references: [Video 1-2]
+
+  voice_call:
+    description: "Full-screen background image + dark controls card + end call button"
+    zones: [status_bar, controls_card(dark_grid), background_image(fullscreen), end_call_button(coral)]
+    best_for: Voice calling
+    references: [Voice 1-3]
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Received messages: surfaceNeutral2 bg, dark text, LEFT aligned, sender avatar on left
+  - Sent messages: surfaceSecondary100 (coral) bg, dark text, RIGHT aligned, own avatar on right
+  - Message bubbles: r24 corners. NEVER square corners on chat bubbles.
+  - Time stamps: small (12px), positioned below the bubble, right-aligned for sent, left-aligned for received
+  - Input bar: surfaceNeutral2, r360 (pill shape), pinned to bottom of screen
+  - Send button: DSButton filledA, r360, icon-only (paper plane icon)
+  - Unread badges: DSBadge with coral bg and white count number
+  - Avatar in conversation list: 48px circle, HD image from HaHo
+  - Online indicator: small green circle (12px) overlapping avatar bottom-right
+  - Live badge: coral pill "Live" overlapping avatar
+  - Voice messages: play button (circle, surfacePrimary100) + waveform bars + duration text
+  - Video thumbnails: r16, coral play button (circle) overlay centered
+  - Dark chat variant: surfacePrimary120 bg, white/coral bubbles, light text
+  - Use real HD images and avatars from HaHo — NEVER grey placeholders
+  - Page background surfaceNeutral0_5 (light variants) or surfacePrimary120 (dark variants)
+  - Call controls: dark circles in 2×3 grid with icon + label, "End call" coral pill at bottom

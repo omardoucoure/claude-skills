@@ -1,0 +1,252 @@
+pattern: settings
+description: Settings, preferences, profile, and account management screens
+source: HaHo Design System — 15 navigation/menu variants + Profile Hero Card analyzed
+figma_references:
+  # Each layout maps to a specific HaHo designer reference screen.
+  # Screenshot the ONE reference that matches your chosen layout — not all of them.
+
+  inline_profile_list:
+    reference: "Style=List With Stats"
+    nodeId: "87:103934"
+
+  profile_hero_with_list:
+    reference: "Style=Flat Active Highlight"
+    nodeId: "87:104050"
+
+  overlapping_dark_coral:
+    reference: "Style=Dark Arrows Coral"
+    nodeId: "87:104003"
+
+  grid_tiles:
+    reference: "Style=Card Grid Tiles"
+    nodeId: "87:104141"
+
+  dark_coral_dropdown:
+    reference: "Style=Dark Coral Dropdown"
+    nodeId: "87:104178"
+
+  layered_dark_coral:
+    reference: "Style=Layered Dark Coral"
+    nodeId: "87:104231"
+
+  # Other useful references:
+  icon_label_coral:
+    reference: "Style=Icon Label Coral"
+    nodeId: "87:104088"
+  icon_grid_dark:
+    reference: "Style=Icon Grid Dark"
+    nodeId: "87:103862"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top:
+    options:
+      - top_app_bar_centered: >
+          Top App Bar (Small-Centered) with "Settings" title + back button.
+          Use when settings is a pushed screen (not a root tab).
+      - top_app_bar_large: >
+          Top App Bar (Large-Icons) with "Settings" title.
+          Use when settings is a root tab with more visual weight.
+
+  profile:
+    description: User identity section — avatar, name, email, optional stats
+    options:
+      - profile_hero_dark: >
+          Dark card (surfacePrimary100/120, r32) with centered avatar + name + email.
+          Optional stats row (Stories / Messages / Videos) below.
+          Use DSAvatar for the profile image.
+          Text: name = h5 (20px medium), email = caption (14px medium, 60% opacity).
+          Stats: numbers = h5 (20px semibold), labels = small (12px regular, 50% opacity).
+      - profile_hero_coral: >
+          Coral card (surfaceSecondary100, r32) with avatar + name + email.
+          Text must be DARK (textNeutral9) on coral — NEVER white.
+      - profile_inline: >
+          Inside the menu card — DSListItem at the bottom with avatar leading + name headline + role supporting.
+          This is the HaHo pattern: user info is part of the list, not a separate card.
+      - profile_hero_light: >
+          Light card (surfaceNeutral2, r32) with avatar + name + email + edit button.
+    components:
+      - "DSAvatar (Style=Icon or Image)"
+      - "DSStatRow or manual stat columns"
+
+  menu:
+    description: Main settings list — grouped rows inside a card
+    structure: >
+      DSCard (surfaceNeutral2, r32, padL=16, padR=16, padT=24, padB=24) containing:
+      - Multiple DSListItem instances stacked with itemSpacing: 0
+      - Each DSListItem has: Leading Item (icon in Button Neutral pill) + Headline + optional Trailing Item
+      - Divider=False on ALL items — HaHo settings lists do NOT use dividers
+      - Visual separation comes from DSListItem internal padding (16px) + card padding (16px horizontal, 24px vertical)
+      - The card padding ensures content never touches card edges
+      - NEVER use padding: 0 on the menu card — always pad 16/24
+    components:
+      - "DSListItem — the ONLY component for settings rows"
+      - "Leading Item (Type=Button) — icon in a Neutral pill button (surfaceNeutral0_5, r360)"
+      - "Trailing Item (Type=Switch/Button/Icon) — toggle, badge, or arrow"
+      - "DSDivider (via showDivider prop on DSListItem) — NEVER draw manual divider frames"
+    row_types:
+      toggle_row: >
+        DSListItem with Leading Item (icon button) + Headline + Trailing Item (Toggle).
+        Use for: Notifications, Dark Mode, Auto-play, Download over WiFi.
+      navigation_row: >
+        DSListItem with Leading Item (icon button) + Headline + Trailing Item (arrow/chevron).
+        Use for: Privacy, Account, Language, Help — rows that navigate to sub-pages.
+      value_row: >
+        DSListItem with Leading Item (icon button) + Headline + Metadata (value text).
+        Use for: Video Quality "HD", Storage "2.4 GB" — display a current value.
+      badge_row: >
+        DSListItem with Leading Item (icon button) + Headline + Trailing Item (Badge).
+        Use for: Notifications with unread count badge.
+      action_row: >
+        DSListItem with Leading Item (icon button) + Headline only (no trailing).
+        Use for: Sign Out, Delete Account, Clear Cache — destructive or final actions.
+    active_item: >
+      The currently active/selected menu item shows its Leading Item icon button
+      with CORAL fill (surfaceSecondary100) instead of neutral. All other items
+      use surfaceNeutral0_5 for their icon button.
+
+  stats:
+    description: Optional data cards below the menu
+    options:
+      - stats_bar_chart: >
+          Light card (surfaceNeutral2, r32) with title + badge count + bar chart.
+          Shows usage stats like "Views of your profile" with a chart.
+      - stats_progress: >
+          Dark card (surfacePrimary100, r32) with progress circle + metric + date.
+          Shows completion like "560 done, 268 in progress".
+    note: Stats cards are SEPARATE cards stacked below the menu card, never inside it.
+
+  footer:
+    description: Bottom actions
+    options:
+      - sign_out_button: >
+          DSButton (Text style or Filled A) for "Sign Out".
+          Can be inside a separate card or as a standalone button.
+      - close_button: >
+          Coral pill button with "Close" or X icon — for dismissing settings modal.
+      - version_text: >
+          Small text "AppName v1.0.0" centered, 50% opacity.
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  profile_hero_with_list:
+    description: "Dark/coral profile card at top + menu card below (overlapping or separate)"
+    zones: [top_app_bar_centered, profile_hero_dark, menu_card, footer]
+    spacing:
+      profile_to_menu: 12px (or -40px for overlapping effect)
+      menu_to_footer: 12px
+    best_for: Apps with prominent user identity (social, messaging)
+
+  inline_profile_list:
+    description: "HaHo native pattern — user info is part of the menu list"
+    zones: [status_bar, menu_card_with_profile_at_bottom, stats_cards, close_button]
+    spacing:
+      card_gap: 12px
+      items_in_card: 0px (stacked flush)
+    best_for: Utility/tool apps where profile is secondary
+
+  grouped_sections:
+    description: "Multiple card groups — Account, Preferences, About"
+    zones: [top_app_bar, account_card, preferences_card, about_card, sign_out]
+    spacing:
+      between_groups: 12px
+    best_for: Complex apps with many settings organized into categories
+
+  overlapping_dark_coral:
+    description: "HaHo Dark Arrows Coral — dark card overlapping coral card with user profile"
+    zones: [status_bar, dark_menu_card, coral_profile_card_overlapping, close_button]
+    spacing:
+      dark_to_coral: -80px (overlap — coral rises behind dark)
+    structure: >
+      Dark card (surfacePrimary100, r32): icon+label+arrow rows with inset dividers (white 20% opacity).
+      Coral card (surfaceSecondary100, r32): Settings row + user profile (avatar image + name + role).
+      Close button: dark circle (surfacePrimary120, r360, 72×56) with X icon.
+    best_for: Premium/social apps where settings feels like a branded experience
+
+  grid_tiles:
+    description: "HaHo Card Grid Tiles — 2×3 card grid with icons + user profile"
+    zones: [status_bar, user_profile_row, tile_grid_2x3, cta_buttons]
+    structure: >
+      Profile row: avatar + name + role + "Profile →" outlined pill button.
+      Grid: 2×3 cards (179×128 each, surfaceNeutral2, r32) with centered icon + label.
+      Bottom CTAs: "Logout →" outlined pill + "Close ×" coral pill side by side.
+    best_for: Dashboard-style apps with visual menu categories
+
+  dark_coral_dropdown:
+    description: "HaHo Dark Coral Dropdown — three color zones (dark + coral + neutral)"
+    zones: [status_bar, dark_icon_grid_2x3, coral_search_section, neutral_content_card]
+    structure: >
+      Dark card top: 2×3 icon grid with labels (white icons on dark bg).
+      Coral card middle: search bar (white input) + hamburger menu icon.
+      Neutral card bottom: hero image or content area.
+      Three distinct color zones create strong visual hierarchy.
+    best_for: Content apps with search-heavy navigation
+
+  layered_dark_coral:
+    description: "HaHo Layered Dark Coral — hero image + dark card with colored row stripes"
+    zones: [avatar_menu_bar, hero_image_card, dark_card_with_colored_rows]
+    structure: >
+      Top: avatar + "Menu" label + logout icon.
+      Hero image card (r32) taking 40% of screen.
+      Dark card below with menu rows — each row has a DIFFERENT background color
+      (dark, primary, coral, neutral) creating a striped effect.
+    best_for: Creative/media apps with strong visual identity
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - ALWAYS use DSListItem instances for settings rows — NEVER draw manual HStack frames with text + toggle
+  - ALWAYS use Leading Item (Type=Button, Neutral style) for row icons — each row gets an icon in a pill
+  - ALWAYS use Trailing Item for toggles, arrows, badges — NEVER manually place a Toggle next to text
+  - NEVER draw manual divider frames — and HaHo settings lists don't use dividers at all (Divider=False on all rows)
+  - Menu card uses DSCard(padL=16, padR=16, padT=24, padB=24) — NEVER padding: 0. The card padding + DSListItem internal padding create proper spacing
+  - Card itemSpacing must be 0 — rows stack flush, visual separation comes from item internal padding + card padding
+  - Even when DSDivider IS used elsewhere, it NEVER takes the full width — the card padding provides natural inset
+  - Active/selected row shows coral icon button (surfaceSecondary100), all others show neutral (surfaceNeutral0_5)
+  - Typography for row labels is bodySemiBold (16px semibold) — comes from DSListItem.headline, never override
+  - Profile name uses h5 (20px medium), email uses caption (14px medium, 60% opacity)
+  - On coral profile card, ALL text must be dark (textNeutral9) — NEVER white on coral
+  - On dark profile card, ALL text must be light (textNeutral0_5) — NEVER dark on dark
+  - Stats cards are SEPARATE cards below the menu — never inside the menu card
+  - Page background is ALWAYS surfaceNeutral0_5 — NEVER change it
+  - Screen padding: padL=12, padR=12, padB=12
+  - No Bold text — HaHo settings use Medium and SemiBold only
+  - NEVER create a flat, basic settings page — always use at minimum 2-3 visual zones with different card backgrounds
+  - Use overlapping cards (negative gap) for at least one section to create depth
+  - Use real DSButton components for actions (Outlined or Filled pills with icons) — NEVER bare text
+  - Consider grid layouts (2×2 or 2×3 tile grids) for menu items — not always vertical lists
+  - Highlight active/selected items with white bg Interaction State + coral leading icon
+  - Each icon in the leading slot should have a different visual treatment — not all identical neutral pills
+  - Mix at least 2 card background colors (dark + neutral, or dark + coral) for visual rhythm
+
+# ─── FIGMA IMPLEMENTATION ──────────────────────────────────────────────────────
+
+figma_implementation:
+  menu_card: >
+    Container Card component (surfaceNeutral2, r32, pad=0) or DSCard with padding: 0.
+    Inside: stack DSListItem instances with itemSpacing: 0.
+    Each DSListItem: set Leading Item = true, Trailing Item = true/false, Divider = true (except last).
+    Leading Item: use Button (Neutral, Medium) instance with icon swap to the correct icon.
+    Trailing Item: use Switch/Toggle instance, or Button (small) with arrow icon, or Badge.
+
+  content_principles: >
+    Settings items must be actual user preferences and account actions — things the user configures.
+    Content navigation (Messages, Trending, Feed) belongs in Home, not Settings.
+    Never reference the current page as a menu item (no "Settings" inside a settings page).
+    Think about what the specific APP needs — a video app needs video quality settings,
+    a chat app needs notification preferences, a social app needs privacy controls.
+    Adapt the content to the app, don't copy a generic list.
+
+  icon_principles: >
+    Every row or tile must have a unique, semantically relevant icon — search the 1364 DS icons
+    for the best match. Never use the same icon for multiple rows. Never leave an icon container
+    empty. Different buttons need different icons. Use your judgment to find the right icon —
+    the DS has icons for virtually every concept.
+
+  profile_card: >
+    For dark hero: DSCard or frame with surfacePrimary100/120 fill, r32.
+    Center DSAvatar (Style=Icon, size 64) + name text (h5) + email text (caption, 60% opacity).
+    Optional stats row below with 3 columns.
+    All text MUST be textNeutral0_5 (light) on dark background.

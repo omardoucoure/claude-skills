@@ -1,0 +1,268 @@
+pattern: feed
+description: Home feed, timeline, explore, following, trending, activity, suggestions, and content discovery screens
+source: HaHo Design System — 24 feed screen variants deeply analyzed (screenshots)
+figma_references:
+  # Each layout maps to a specific HaHo designer reference screen.
+
+  image_carousel_feed:
+    reference: "[Feed] 1 — Menu+Feed+Search top bar + avatar+name+time post header + horizontal image carousel + likes/comments pills + bottom nav"
+    nodeId: "85:54400"
+
+  search_text_photo_posts:
+    reference: "[Feed] 2 — Search bar + neutral post cards (avatar+name+time+text+hashtags+horizontal photo row with coral count pill)"
+    nodeId: "85:54344"
+
+  explore_fullscreen_cards:
+    reference: "[Feed] 3 — 'Explore' title + full-height image card with text overlay (title+description+coral link) + peek next card"
+    nodeId: "85:54322"
+
+  following_masonry_grid:
+    reference: "[Feed] 4 — 'Following' + 2-column masonry grid cards (image+name+location+text+time+avatar) — Component Set with 2 variants"
+    nodeId: "85:56152"
+
+  suggestions_dark_cards:
+    reference: "[Feed] 5 — 'Suggestions' + dark cards (avatar+name+location+Follow+horizontal photo row with coral count)"
+    nodeId: "85:54266"
+
+  image_post_feed_bottom_nav:
+    reference: "[Feed] 6 — Feed + full image posts (avatar+Follow floating on image+text+time+like count coral pill) + bottom nav"
+    nodeId: "85:54240"
+
+  album_photo_posts:
+    reference: "[Feed] 7 — Search bar + album-style posts (avatar+name+time+description+photo grid 2×2+likes+comments)"
+    nodeId: "85:54193"
+
+  suggestions_light_list:
+    reference: "[Feed] 8 — 'Suggestions' + light list (avatar+name+location+Follow/Unfollow+3-4 photo row) scrolling"
+    nodeId: "85:54134"
+
+  search_carousel_posts:
+    reference: "[Feed] 9 — Search bar + post cards with horizontal image carousel (coral highlight image) + text + hashtags"
+    nodeId: "85:54099"
+
+  following_masonry_staggered:
+    reference: "[Feed] 10 — 'Following' + 2-column staggered masonry (different heights) + 'New post available' coral toast"
+    nodeId: "85:54046"
+
+  stories_audio_posts:
+    reference: "[Feed] 11 — 'Following' + horizontal story avatars (Live/badge) + audio post cards (image+title+description+waveform+headphones)"
+    nodeId: "85:53933"
+
+  boards_tabs_image_posts:
+    reference: "[Feed] 12 — 'Boards' + cover image with #hashtag+Follow + segmented tabs (Images/Video/Reviews) + image post cards + bottom nav"
+    nodeId: "85:53889"
+
+  stories_horizontal_audio:
+    reference: "[Feed] 13 — 'Following' + story avatars + horizontal layout post cards (image left + title+description+waveform right)"
+    nodeId: "85:53776"
+
+  create_post_composer:
+    reference: "[Feed] 14 — 'Feed' + post composer card ('What's on your mind?' + Add photo/Change Status/Add location) + full-width image"
+    nodeId: "85:53750"
+
+  trending_text_image_posts:
+    reference: "[Feed] 15 — 'Trending' + neutral post cards (avatar+name+time+text+hashtag+single image+likes/comments/share)"
+    nodeId: "85:53713"
+
+  following_masonry_grid_alt:
+    reference: "[Feed] 16 — 'Following' + 2-column masonry (image+name+location+text+time+avatar) with view toggle icons"
+    nodeId: "85:53660"
+
+  boards_tabs_grid_bottom_nav:
+    reference: "[Feed] 17 — 'Boards' + cover image with #travel+Follow + icon tabs + 2-column grid cards (image+likes+time+name) + bottom nav"
+    nodeId: "85:53594"
+
+  feed_coral_engagement:
+    reference: "[Feed] 18 — 'Feed' + neutral post cards (avatar+name+time+text+hashtag+image) + coral engagement pills (likes/comments) floating right"
+    nodeId: "85:53563"
+
+  activity_feed:
+    reference: "[Feed] 19 — 'Activity' + list items (liked photos, commented, new friends, checked in) with mini photo rows + avatar stacks"
+    nodeId: "85:53517"
+
+  find_contacts_list:
+    reference: "[Feed] 20 — 'Find Contact' + dark import buttons (Facebook/X) + 'Suggested Contacts' card with avatar+name+Follow list"
+    nodeId: "85:53450"
+
+  dark_search_photo_posts:
+    reference: "[Feed] 21 — Dark bg + search bar + dark post cards (avatar+name+time+text+hashtag+photo row with coral count)"
+    nodeId: "85:53394"
+
+  find_contacts_grid:
+    reference: "[Feed] 22 — 'Find Contact' + Requests/Suggested segmented + 2-column contact cards (avatar+name+location+Follow) + bottom nav"
+    nodeId: "85:53347"
+
+  trending_dark_posts:
+    reference: "[Feed] 23 — 'Trending' + dark post cards (avatar+name+time+text+hashtag+image+likes/comments/share)"
+    nodeId: "85:53310"
+
+  suggestions_light_photo_rows:
+    reference: "[Feed] 24 — 'Suggestions' + neutral cards (avatar+name+location+Follow+horizontal photo row with coral count)"
+    nodeId: "85:53254"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    description: Navigation header with title and actions
+    options:
+      - menu_title_search: >
+          Top App Bar: menu (≡) left + centered title ("Feed"/"Trending"/"Explore") + search (🔍) right.
+          Most common. Used in: F1, F3, F6, F14, F15, F18.
+      - menu_title_add: >
+          Menu (≡) left + title + add (+) icon right. Used in: F5, F8, F24.
+      - back_title_icons: >
+          Back arrow + title ("Following"/"Boards") + trailing icons (people/list/grid toggle).
+          Used in: F4, F10, F12, F16, F17.
+      - back_title_search: >
+          Back arrow + title ("Activity") + search or edit icon. Used in: F19.
+      - close_title_search: >
+          Close (X) + title ("Find Contact") + search icon. Used in: F20, F22.
+      - search_bar: >
+          Inputs-Filled search bar (with search icon + "Search..." placeholder) + add icon right.
+          Used in: F2, F7, F9, F21.
+
+  stories_bar:
+    description: Horizontal scrollable row of story avatars
+    structure: >
+      Horizontal row of circular avatars (56px) with name below.
+      Optional "Live" coral badge on avatar. Optional notification count badge.
+      Scrolls horizontally with peek. Always below top bar, above feed content.
+    used_in: [F11, F13]
+
+  post_card:
+    description: The core feed unit — a content post
+    variants:
+      - image_carousel_post: >
+          Neutral card (surfaceNeutral2, r32, pad0): avatar+name+time header → horizontal image row (r16, peek) → likes/comments pills.
+          Images are full-width inside the card. Coral FAB (+) button floating on image.
+          Used in: F1, F6, F9, F12, F17.
+      - text_photo_post: >
+          Neutral card (surfaceNeutral2, r32, pad32): avatar+name+time → text body + hashtags bold → horizontal photo row (3-4 small images with coral count pill "26 photos") → engagement row (likes/comments).
+          Used in: F2, F7, F15, F18, F21, F23, F24.
+      - fullscreen_image_post: >
+          Full-height image card (r32) with text overlay at bottom: title (h4 white) + description + coral link button.
+          Secondary cards peek from right. Explore/discovery style.
+          Used in: F3.
+      - masonry_card: >
+          Small card in 2-column grid: image (r16, variable height) → name + location + text + time + small avatar.
+          Staggered heights create Pinterest-like layout. Quick Menu FAB floating.
+          Used in: F4, F10, F16.
+      - suggestion_card: >
+          Dark card (surfacePrimary100, r32, pad32): avatar + name + location + Follow outlined button → horizontal photo row (r16) with coral count pill.
+          Used in: F5, F21.
+      - audio_post: >
+          Neutral card (surfaceNeutral2, r32): image left (r16) + title + description + audio waveform visualization + author name + headphones icon.
+          Used in: F11, F13.
+      - composer: >
+          Neutral card (surfaceNeutral2, r32, pad32): avatar + "What's on your mind?" + dropdown arrow → DSDivider → action rows (Add photo, Change Status, Add location) with icons.
+          Used in: F14.
+
+  engagement_row:
+    description: Likes, comments, share actions below a post
+    variants:
+      - pills: "Coral or neutral pills: '126 ♡' + '26 💬' — compact. Used in: F1, F6, F12, F17."
+      - inline: "Icon + count inline: '126 ♡  12 💬' + share icon right. Used in: F7, F15, F23."
+      - coral_floating: "Coral pills floating right side of post: '226 ♡' + '26 💬'. Used in: F18."
+
+  bottom_nav:
+    description: Bottom App Bar for main navigation
+    structure: >
+      DSBottomAppBar with 5 tabs: Home, People, Add (+, coral FAB), Calendar, Notifications.
+      Floating style with pad horizontal. Not always present — some feeds don't show it.
+    used_in: [F1, F6, F12, F17, F22]
+
+  home_indicator:
+    required: true
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  standard_feed:
+    description: "Vertical scrolling feed with post cards — the classic social media feed"
+    zones: [top_bar(menu_title_search), post_cards(stacked), bottom_nav, home_indicator]
+    best_for: Home feed, main timeline, content consumption
+    references: [F1, F2, F6, F7, F9, F15, F18]
+
+  explore_discovery:
+    description: "Full-screen swipeable cards for content exploration"
+    zones: [top_bar(menu_title_search), fullscreen_card(image+text_overlay), home_indicator]
+    best_for: Explore/discover tab, featured content, editorial
+    references: [F3]
+
+  masonry_grid:
+    description: "2-column Pinterest-style staggered grid"
+    zones: [top_bar(back_title_icons), masonry_cards(2_column), quick_menu_fab, home_indicator]
+    best_for: Following feed, visual-first browsing, photo discovery
+    references: [F4, F10, F16]
+
+  suggestions_cards:
+    description: "User suggestion cards with photo previews"
+    zones: [top_bar(menu_title_add), suggestion_cards(stacked), home_indicator]
+    best_for: People discovery, follow suggestions, new connections
+    references: [F5, F8, F24]
+
+  stories_feed:
+    description: "Stories bar at top + audio/rich post cards below"
+    zones: [top_bar, stories_bar, post_cards(audio/rich), home_indicator]
+    best_for: Social feeds with stories, podcast/audio content
+    references: [F11, F13]
+
+  boards_tabs:
+    description: "Board/channel with cover image + content tabs + post grid"
+    zones: [top_bar(back_title), cover_image_with_tag, segmented_tabs, post_grid, bottom_nav, home_indicator]
+    best_for: Topic boards, hashtag pages, themed collections
+    references: [F12, F17]
+
+  activity_feed:
+    description: "Chronological list of user activities and notifications"
+    zones: [top_bar(back_title), activity_items(list), home_indicator]
+    best_for: Activity/notification feed, social updates
+    references: [F19]
+
+  find_contacts:
+    description: "Contact import + suggested people list or grid"
+    zones: [top_bar(close_title), import_buttons, contacts_list_or_grid, bottom_nav, home_indicator]
+    best_for: Friend finder, contact import, onboarding follow
+    references: [F20, F22]
+
+  dark_feed:
+    description: "Dark background feed with dark post cards"
+    zones: [top_bar, search_bar, dark_post_cards, home_indicator]
+    best_for: Night mode, premium/cinematic feed
+    references: [F21, F23]
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Use real HD images from HaHo for ALL post images — copy imageHash fills. NEVER use grey placeholders.
+  - Post cards use neutral (surfaceNeutral2) or dark (surfacePrimary100) backgrounds with r32 corners.
+  - Avatar in post headers: DSAvatar (48px, circle, HD image from HaHo).
+  - Username: bodySemiBold (16px). Time ago: caption (14px, 50% opacity). Location: caption.
+  - Hashtags in post text: bold weight. Regular text: bodyRegular.
+  - Photo rows inside posts: horizontal frame with gap=8, r16 corners on each image.
+  - Coral count pill: surfaceSecondary100, r16, "26 photos" text (dark on coral).
+  - Engagement pills: neutral or coral, r360, icon + count text.
+  - Stories avatars: 56px circle with 2px border. "Live" = coral badge overlay. Notification = dark badge with count.
+  - Bottom nav: DSBottomAppBar (floating style) with 5 tabs. Central tab = coral FAB (+).
+  - Search bar: Inputs-Filled with search icon left, "Search..." placeholder.
+  - Masonry grid: 2-column frame with gap=12, variable card heights (200-400px).
+  - Quick Menu FAB: coral pill button floating at bottom center with "Quick menu ≡" text.
+  - Dark feed cards: surfacePrimary100 bg, textNeutral0_5 for ALL text.
+  - Follow button: DSButton outlined (Medium), "Follow" text. Unfollow: filledC, "Unfollow".
+  - Page background ALWAYS surfaceNeutral0_5. Screen padding: padL=12, padR=12, padB=12.
+  - counterAxisAlignItems = MIN on screen frame.
+  - Import buttons (Find Contacts): filledC (dark), Big, full-width. "Import from Facebook" + brand icon.
+
+# ─── COMPONENTS TO USE ──────────────────────────────────────────────────────────
+
+components:
+  - "Top App Bar — menu/back + title + trailing icons"
+  - "DSAvatar — post author avatars, story circles"
+  - "DSButton — Follow/Unfollow, engagement, import, FAB"
+  - "Inputs-Filled — search bar"
+  - "DSBottomAppBar — bottom navigation (floating)"
+  - "Segmented Picker — content tabs (Images/Video/Reviews)"
+  - "DSBadge — notification counts, Live badge"
+  - "DSListItem — activity feed items, contact list rows"
+  - "DSDivider — between post sections"

@@ -1,0 +1,196 @@
+pattern: alerts
+description: Alert dialogs, banners, toasts, error states, success confirmations, warning prompts, info notices, permission requests, and empty/offline states
+source: HaHo Design System — 11 alert screen variants analyzed (error + warning + success + info + dialogs + empty states + permission prompts)
+figma_references:
+  offline_state:
+    reference: "[Alerts] 1 — Search bar + dark/coral offline card ('Stranded offline!' + disconnect icon + Reconnect Now CTA)"
+    nodeId: "85:35888"
+  profile_prompt:
+    reference: "[Alerts] 2 — Profile page + neutral modal card ('Chase down that beloved snapshot!' + camera icon + CTA buttons)"
+    nodeId: "85:35871"
+  error_state:
+    reference: "[Alerts] 3 - Error — Page with red/error alert banner or card"
+    nodeId: "85:35755"
+  warning_state:
+    reference: "[Alerts] 4 - Warning — Page with yellow/warning alert ('Battery hog' style warning)"
+    nodeId: "85:35670"
+  success_state:
+    reference: "[Alerts] 5 - Success — Page with green/success banner ('Boom! Mission completed' + calendar page)"
+    nodeId: "85:35454"
+  info_state:
+    reference: "[Alerts] 6 - Info — Page with blue/info notice banner"
+    nodeId: "85:35366"
+  action_dialog:
+    reference: "[Alerts] 7 — Yellow alert dialog with 3 action buttons (Delete App / Disable Background Usage / Cancel) overlaying calendar"
+    nodeId: "85:35290"
+  confirmation_dialog:
+    reference: "[Alerts] 8 — Confirmation dialog with destructive action"
+    nodeId: "85:35255"
+  toast_notification:
+    reference: "[Alerts] 9 — Toast/snackbar notification at top or bottom"
+    nodeId: "85:35240"
+  permission_request:
+    reference: "[Alerts] 10 — Permission request dialog (camera, notifications, location)"
+    nodeId: "85:35226"
+  notification_prompt:
+    reference: "[Alerts] 11 — Dark card notification prompt ('Don't miss a beat!' + Turn On / Maybe Later) overlaying calendar timeline"
+    nodeId: "85:35140"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  background_page:
+    description: The page content behind/below the alert
+    structure: >
+      Alerts are OVERLAYS on existing pages — they appear on top of normal content.
+      The background page should be a real page (calendar, profile, feed, etc.)
+      with optional dimming overlay (black 40% opacity) behind the alert.
+    note: Alerts are never standalone screens — they always overlay real content.
+
+  alert_banner:
+    description: Horizontal banner notification at top of page
+    options:
+      - success_banner: >
+          Green background card (r16, pad16): checkmark icon + 'Boom!' title +
+          success message text + X dismiss button.
+      - error_banner: >
+          Red/coral background card (r16, pad16): alert-triangle icon + error title +
+          error description + X dismiss or retry button.
+      - warning_banner: >
+          Yellow/amber background card (r16, pad16): warning icon + title +
+          message + dismiss.
+      - info_banner: >
+          Blue/neutral background card (r16, pad16): info-circle icon + title +
+          message + dismiss or action button.
+
+  alert_card:
+    description: Centered modal alert card overlaying content
+    structure: >
+      DSCard (r32, pad24-32) centered on screen with:
+      - Icon (48-64px) at top: relevant icon (wifi-off, camera, bell, check-circle, alert-triangle)
+      - Title (h4 24px or h5 20px medium)
+      - Message body (bodyRegular 16px, 60-80% opacity, centered)
+      - Divider (optional)
+      - Action buttons (1-3): primary CTA (filledA) + secondary (outlined or text) + cancel (text)
+    backgrounds:
+      - neutral: "surfaceNeutral2 — standard informational alert"
+      - dark: "surfacePrimary100/120 — serious/important alert with light text"
+      - coral_dark: "Dark top section + coral bottom section — offline/error states"
+      - warning_yellow: "Yellow/amber background — warning alerts"
+      - success_green: "Green tint — success confirmations"
+
+  alert_dialog:
+    description: Action dialog with multiple choices
+    structure: >
+      Yellow or colored card (r32, pad24) with:
+      - Icon (top, centered)
+      - Title (h5 20px medium)
+      - Description (body, centered)
+      - Stacked action buttons (full-width):
+        1. Primary destructive action (filledA, coral) — 'Delete App'
+        2. Secondary action (outlined or neutral) — 'Disable Background Usage'
+        3. Cancel (text style) — 'Cancel'
+    note: Buttons stacked vertically, not side by side, for mobile ergonomics.
+
+  toast_snackbar:
+    description: Temporary notification bar
+    structure: >
+      Floating bar (surfacePrimary100 or surfaceNeutral2, r16, pad12-16):
+      - Icon (left) + message text (body) + optional action button (text style, right)
+      - Appears at top or bottom of screen with animation
+      - Auto-dismisses after 3-5 seconds
+    position: top or bottom, with 16px margin from edges
+
+  empty_state:
+    description: Content-empty or error state display
+    structure: >
+      Centered in the content area:
+      - Large icon (64-80px, 30% opacity or themed color)
+      - Title (h4 24px medium) — descriptive and friendly
+      - Subtitle (body 16px regular, 60% opacity) — helpful message
+      - CTA button (filledA or outlined) — action to resolve
+    examples:
+      - offline: "'Stranded offline!' + wifi-off icon + 'Reconnect Now' CTA"
+      - empty_inbox: "'No messages yet' + mail icon + 'Start a conversation' CTA"
+      - no_results: "'Nothing found' + search icon + 'Try different keywords' CTA"
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  banner_on_page:
+    description: "Alert banner overlaying page content — top or inline"
+    zones: [background_page, alert_banner(top_overlay)]
+    structure: >
+      Normal page content renders fully.
+      Banner slides in from top, pushing content down or floating above.
+      Banner has colored background matching alert type.
+    best_for: Non-blocking notifications, status messages
+
+  modal_card:
+    description: "Centered alert card over dimmed background"
+    zones: [background_page(dimmed), alert_card(centered)]
+    structure: >
+      Background page with 40% black overlay.
+      Alert card centered vertically and horizontally.
+      Card has icon + title + message + action buttons.
+    best_for: Important decisions, confirmations, permissions
+
+  action_dialog:
+    description: "Multi-action dialog — destructive choice prompt"
+    zones: [background_page(dimmed), alert_dialog(centered)]
+    structure: >
+      Colored dialog card (yellow for warnings, neutral for info).
+      3 stacked action buttons: destructive + alternative + cancel.
+      Clear hierarchy: primary action is most prominent.
+    best_for: Destructive actions, settings changes, permission grants
+
+  full_state_screen:
+    description: "Full empty/error state replacing page content"
+    zones: [top_bar, empty_state(centered_in_content)]
+    structure: >
+      Top bar remains visible.
+      Content area replaced by centered empty state: icon + title + message + CTA.
+      No background content visible.
+    best_for: Offline states, empty content, error recovery
+
+  notification_prompt:
+    description: "Dark card prompt for enabling features — overlaying page"
+    zones: [background_page, notification_card(dark, centered)]
+    structure: >
+      Dark card (surfacePrimary100, r32, pad24-32) with:
+      - Icon (bell, notification) at top
+      - Title ('Don't miss a beat!')
+      - Description text
+      - Primary CTA (filledA, coral) — 'Turn On'
+      - Secondary (outlined or text) — 'Maybe Later'
+      Overlays the current page content (e.g., calendar timeline behind).
+    best_for: Feature promotion, permission requests, onboarding prompts
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - Alerts are OVERLAYS — never standalone pages. Always show real page content behind.
+  - Banner colors: success = green, error = red/coral, warning = yellow/amber, info = blue/neutral
+  - Dialog card: r32, pad24-32, centered both axes with dimmed background behind
+  - Action buttons in dialogs: stacked VERTICALLY (full-width each), not side by side
+  - Button hierarchy: primary/destructive action first (top), cancel always last (bottom)
+  - Destructive button: filledA (coral) with warning icon — 'Delete', 'Remove', 'Disconnect'
+  - Cancel button: text style or outlined — always the safest/least prominent option
+  - Icons in alerts: 48-64px, semantically matching the alert type (wifi-off, check-circle, alert-triangle, bell, camera)
+  - Alert titles: h5 (20px medium) — concise and descriptive
+  - Alert messages: bodyRegular (16px regular), 60-80% opacity, centered, 2-3 lines max
+  - Toast/snackbar: dark background (surfacePrimary100) with light text, auto-dismiss
+  - Empty state illustrations: large icon with low opacity, not full illustrations
+  - Permission dialogs: explain WHY the permission is needed, not just what it does
+  - Dark alert cards: light text (textNeutral0_5), coral CTA button
+  - Yellow warning cards: dark text (textNeutral9), coral destructive button
+  - Coral/dark split cards (offline state): dark top with icon/title + coral bottom with CTA
+  - Page background ALWAYS surfaceNeutral0_5 — the alert card has its own bg color
+  - Dimming overlay: black at 40% opacity behind modal alerts
+
+components:
+  - DSCard (alert cards, dialog cards, banner containers)
+  - DSButton (action buttons: filledA for primary, outlined for secondary, text for cancel)
+  - DSTopAppBar (background page navigation — still visible)
+  - DSDivider (optional separator between message and buttons)
+  - DSBadge (notification count in permission prompts)

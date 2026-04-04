@@ -1,0 +1,1 @@
+build-script:~/.claude/skills/demo-assets/login2/build.js

@@ -1,0 +1,311 @@
+pattern: profile
+description: User profile, account, and personal page screens — showing user identity, stats, content, and social actions
+source: HaHo Design System — 20 profile screen variants deeply analyzed (screenshots)
+figma_references:
+  # Each layout maps to a specific HaHo designer reference screen.
+  # Screenshot the ONE reference that matches your chosen layout — not all of them.
+
+  image_carousel_info_card:
+    reference: "[Profile] 1 — Horizontal image carousel with peek + page dots + neutral info card (name, bio, stats, coral +)"
+    nodeId: "85:55264"
+
+  avatar_info_stats_progress:
+    reference: "[Profile] 2 — Small avatar + neutral info card + Follow coral button + progress circles + reviews"
+    nodeId: "85:55215"
+
+  layered_image_info_card_coral:
+    reference: "[Profile] 3 — Layered Card image + page dots + dark info card (name, bio, stats) + coral Follow bar"
+    nodeId: "85:55186"
+
+  cover_overlapping_coral_grid:
+    reference: "[Profile] 4 — Cover image + dark info card overlapping + coral CTA bar (Follow + social icons) + photo grid"
+    nodeId: "85:55149"
+
+  dark_card_avatar_photo_grid:
+    reference: "[Profile] 5 — Dark profile card (avatar, name, bio, stats, edit icon) + Layered Card photo grid below"
+    nodeId: "85:55096"
+
+  cover_overlapping_neutral_grid:
+    reference: "[Profile] 6 — Cover image + neutral info card overlapping (-80px) + Follow + social + photo grid"
+    nodeId: "85:55061"
+
+  avatar_card_progress_charts:
+    reference: "[Profile] 7 — Compact avatar card + Follow coral + dark stats card (progress circles) + bar chart"
+    nodeId: "85:54961"
+
+  cover_coral_info_tabs_grid:
+    reference: "[Profile] 8 — Cover image + coral info card overlapping + dark tabs card (grid/list/video) + photo grid"
+    nodeId: "85:54913"
+
+  cover_offset_info:
+    reference: "[Profile] 9 — Cover image (70% width) + neutral info card offset right + Follow + Message + tabs + photo grid"
+    nodeId: "85:54863"
+
+  fullscreen_portrait_bottom_card:
+    reference: "[Profile] 10 — Full-screen portrait photo + floating Message/Follow buttons on image + neutral info card at bottom (followers + following with avatar stacks)"
+    nodeId: "85:54837"
+
+  avatar_stories_event_grid:
+    reference: "[Profile] 11 — Compact avatar+name row + Follow + travel stories carousel + filter tabs + event card grid"
+    nodeId: "85:54793"
+
+  layered_card_avatar_dark_grid:
+    reference: "[Profile] 12 — Layered Card top + neutral info card (avatar, name, bio, stats, edit) + dark photo grid"
+    nodeId: "85:54729"
+
+  cover_info_stats_progress:
+    reference: "[Profile] 13 — Cover image + coral add-friend button + neutral info card + stats + dark progress circle card + photo grid"
+    nodeId: "85:54677"
+
+  fullscreen_portrait_mutual_friends:
+    reference: "[Profile] 14 — Full-screen portrait + neutral info card overlapping (name, location, bio, mutual friends avatars) + X/heart action buttons"
+    nodeId: "85:54650"
+
+  avatar_friends_suggestions:
+    reference: "[Profile] 15 — Avatar + Follow coral + name + bio + friends/reviews stats + 'People you might know' carousel + 'Favourite places' carousel"
+    nodeId: "85:54595"
+
+  cover_overlapping_coral_cta:
+    reference: "[Profile] 16 — Cover image + neutral info card overlapping (name, bio, friends, reviews) + coral bar (Follow + social icons) + photo grid"
+    nodeId: "85:54559"
+
+  card_info_tabs_photo_grid:
+    reference: "[Profile] 17 — Neutral card (avatar, name, bio, stats with dividers, Message + Follow CTAs) + segmented tabs (Images/Video/Reviews) + photo grid"
+    nodeId: "85:54523"
+
+  cover_action_buttons_carousel:
+    reference: "[Profile] 18 — Cover image + floating dark action buttons (add, edit, info) + name card + horizontal photo carousel + dark stats bar"
+    nodeId: "85:54484"
+
+  fullscreen_minimal_card:
+    reference: "[Profile] 19 — Full-screen portrait photo + minimal floating card at bottom (name, location, mutual friend avatars, coral + button)"
+    nodeId: "85:54466"
+
+  layered_image_dark_info:
+    reference: "[Profile] 20 — Layered Card image hero + page dots + dark info card (name, bio, stats with dividers, Message + Follow)"
+    nodeId: "85:54438"
+
+# ─── SCREEN STRUCTURE ──────────────────────────────────────────────────────────
+
+zones:
+  top_bar:
+    description: Top App Bar with back button + "Profile" title + trailing actions
+    options:
+      - back_title_actions: >
+          Top App Bar (Small-Centered) with "Profile" title + back arrow.
+          Trailing: add (+) icon, more (⋮) icon, or menu (≡) icon.
+          Used in most profiles: P1-P9, P12-P14, P16, P18, P20.
+      - avatar_name_follow: >
+          Compact top bar: small avatar + name + "Follow +" coral button right.
+          No "Profile" title — name IS the title.
+          Used in: P11, P15.
+      - none: >
+          No top bar — full-screen portrait takes the entire screen.
+          Status bar overlays the image.
+          Used in: P10, P19.
+
+  hero:
+    description: Main visual — the user's identity showcase
+    options:
+      - image_carousel: >
+          Horizontal row of image cards with peek effect. Main card ~70% width, r32.
+          Secondary cards peek from right. Page-Controls dots below.
+          Used in: P1, P3, P20.
+      - cover_image: >
+          Single image card (r32, HD image fill, 200-300px tall) as background.
+          Info card overlaps from below. Optional floating buttons on image.
+          Used in: P4, P6, P8, P9, P13, P16, P18.
+      - layered_card_image: >
+          Layered Card component (Direction=Bottom, Layers=2) with HD image.
+          Creates depth effect. MUST have solid bg + image fill on Content card.
+          Used in: P3, P5, P12, P20.
+      - fullscreen_portrait: >
+          Full-screen portrait photo — takes 70-90% of screen height.
+          No card wrapper. Image fills from edge to edge within screen padding.
+          Floating buttons on top of image (Message, Follow).
+          Small info card overlapping from bottom.
+          Used in: P10, P14, P19.
+      - avatar_card: >
+          Small avatar image (56-80px, r32 or circle) + name + bio in a neutral card.
+          No large cover image — compact profile header.
+          Used in: P2, P7, P15, P17.
+
+  info_card:
+    description: User info — name, bio, stats, action buttons
+    options:
+      - neutral_card: >
+          Neutral card (surfaceNeutral2, r32, pad32) with name (h4 24px medium),
+          bio (body 16px, 2-3 lines, "read more" link), stats row (photos/followers/following
+          with dividers), Follow + Message CTAs.
+          Dark text (textNeutral9). Standard for most profiles.
+          Used in: P1, P2, P6, P9, P14, P15, P17.
+      - dark_card: >
+          Dark card (surfacePrimary100, r32, pad32) with name + bio + stats.
+          Light text (textNeutral0_5). Stats with dividers. Coral Follow button.
+          Message button (text style or outlinedLight).
+          Used in: P4, P5, P12, P20.
+      - coral_card: >
+          Coral card (surfaceSecondary100, r32, pad32) with name + bio + stats.
+          Dark text (textNeutral9). Follow + Message CTAs.
+          Used in: P3, P8.
+      - floating_minimal: >
+          Small floating neutral card (r32, pad24) at bottom of full-screen portrait.
+          Name + location + mutual friends (avatar stack + "+26" count) + coral action button.
+          Used in: P10, P14, P19.
+
+  stats_row:
+    description: User metrics — photos, followers, following
+    structure: >
+      3 columns: number (h5 20px semibold) + label (small 12px, 50% opacity).
+      Optional vertical dividers between columns.
+      Common values: "1,200 photos" / "2,980 followers" / "1,600 following".
+    variants:
+      - with_dividers: "3 stat columns separated by thin vertical lines (most common)"
+      - compact: "3 stat columns without dividers"
+      - with_icons: "Icon + stat pairs (e.g., group icon + '62K friends')"
+      - with_avatars: "Follower count + overlapping avatar circles showing real faces"
+    component: "Stats Row component (if available) or manual 3-column HStack"
+
+  cta_actions:
+    description: Follow, Message, and social buttons
+    options:
+      - follow_message_row: >
+          "Follow +" coral pill button (filledA, Medium) + "Message" outlined/text button with chat icon.
+          Used in: P3, P4, P6, P8, P9, P14, P16, P17, P20.
+      - follow_only: >
+          Single "Follow +" coral button (filledA, Medium).
+          Used in: P2, P7, P11, P15.
+      - coral_bar_with_social: >
+          Coral card (surfaceSecondary100, r32) with "Follow +" dark button + social icons (Instagram, Facebook, X).
+          Used in: P4, P16.
+      - floating_on_image: >
+          "Message" + "Follow" buttons floating on top of the cover/portrait image.
+          Used in: P10.
+      - action_buttons_column: >
+          Vertical column of dark circle buttons floating right of cover image:
+          add-friend, edit/pencil, info. Each surfacePrimary120, r360.
+          Used in: P18.
+
+  content_grid:
+    description: User's content — photos, videos, events
+    options:
+      - photo_grid_3col: >
+          3-column photo grid with r16 images. Mixed sizes (some span 2 columns).
+          Used in: P4, P5, P6, P8, P9, P12, P13, P16.
+      - photo_grid_with_tabs: >
+          Segmented tabs (grid/columns/video/favorites/hashtag icons) above the photo grid.
+          Active tab = dark fill. Used in: P5, P8, P9, P12.
+      - horizontal_carousel: >
+          Horizontal scrollable row of photo cards with labels below.
+          Used for stories (P11, P15) or themed collections.
+      - event_cards_2col: >
+          2-column event card grid with image + title + location + attendee avatars.
+          Used in: P11.
+      - stats_cards: >
+          Progress circles, bar charts, review counts in cards below the profile.
+          Used in: P2, P7, P13.
+
+  home_indicator:
+    description: Always present
+    required: true
+
+# ─── LAYOUT PATTERNS ──────────────────────────────────────────────────────────
+
+layouts:
+  image_hero_info_below:
+    description: "Image carousel or cover image as hero + info card below (overlapping or separate)"
+    zones: [top_bar, hero(image), page_controls, info_card, cta_actions, content_grid, home_indicator]
+    best_for: Photo-centric profiles (photographers, influencers, visual portfolios)
+    references: [P1, P3, P6, P8, P13, P16, P20]
+
+  compact_avatar_stats:
+    description: "Small avatar + info card + stats/progress cards"
+    zones: [top_bar, info_card(avatar), stats_row, stats_cards, home_indicator]
+    best_for: Data-focused profiles (analytics, reviews, progress tracking)
+    references: [P2, P7, P15]
+
+  cover_overlapping_grid:
+    description: "Cover image + overlapping dark/coral info card + photo grid"
+    zones: [top_bar, hero(cover), info_card(overlapping), cta_actions, content_grid, home_indicator]
+    best_for: Social media profiles with content feeds
+    references: [P4, P5, P8, P9, P12, P16]
+
+  fullscreen_portrait:
+    description: "Full-screen portrait photo + minimal floating card at bottom"
+    zones: [status_bar(overlay), hero(fullscreen), info_card(floating_minimal), home_indicator]
+    best_for: Dating apps, personal branding, visual-first profiles
+    references: [P10, P14, P19]
+
+  card_tabs_grid:
+    description: "Neutral card with full profile info + segmented content tabs + photo grid"
+    zones: [top_bar, info_card(with_ctas), segmented_tabs, content_grid, home_indicator]
+    best_for: Standard social profiles with organized content sections
+    references: [P17]
+
+  stories_events:
+    description: "Compact header + horizontal story carousel + event grid"
+    zones: [avatar_name_follow, stories_carousel, filter_tabs, event_grid, home_indicator]
+    best_for: Event-focused profiles, travel, social discovery
+    references: [P11]
+
+# ─── DESIGN RULES ──────────────────────────────────────────────────────────────
+
+rules:
+  - ALWAYS use real HD images from HaHo — copy imageHash fills from reference nodes. NEVER use grey placeholders.
+  - ALWAYS use Layered Card COMPONENT for image heroes with depth — NEVER manual frames.
+  - Layered Card Content MUST have solid bg (surfaceNeutral2) BEFORE image fill.
+  - Cover images use r32 corners and clip content.
+  - Info card overlapping cover: use negative gap or manual offset. Typical overlap: -80px to -120px.
+  - Stats row: numbers = h5 (20px semibold), labels = small (12px regular, 50% opacity).
+  - "Follow +" button: DSButton filledA, Medium, with plus icon. Coral bg, dark text.
+  - "Message" button: DSButton outlined or text, with chat/message icon.
+  - Dark info cards: ALL text textNeutral0_5 (light). Coral info cards: ALL text textNeutral9 (dark).
+  - Photo grid images: r16 corners, scaleMode FILL. Mixed sizes for visual interest.
+  - Content tabs: icon-only segmented row (grid, columns, video, favorites, hashtag). Active = dark fill.
+  - Avatar in compact profiles: DSAvatar component (56-80px, circle or roundedRect).
+  - "read more" on bio text: truncate to 2-3 lines with "... **read more**" bold link.
+  - Mutual friends: overlapping avatar circles (4-5 small avatars + "+26" dark pill count).
+  - Page background ALWAYS surfaceNeutral0_5. Screen padding: padL=12, padR=12, padB=12.
+  - counterAxisAlignItems = MIN on screen frame.
+  - Card padding = 32px, card radius = 32.
+  - Profile Hero Card component (87:97036) has 4 variants (Light, Dark, Cover, Coral) — USE IT when applicable.
+
+# ─── COMPONENTS TO USE ──────────────────────────────────────────────────────────
+
+components:
+  - "Profile Hero Card — 4 variants (Light/Dark/Cover/Coral) for cover+info combinations"
+  - "Layered Card — depth effect for image heroes"
+  - "Stats Row — 9 variants (With Dividers, Compact, With Button, With Icons, Progress, etc.)"
+  - "DSAvatar — user avatar (circle or roundedRect)"
+  - "DSButton — Follow (filledA), Message (outlined/text), action buttons"
+  - "Page-Controls — page dots for image carousels"
+  - "Segmented Picker — content tabs (Images/Video/Reviews)"
+  - "Top App Bar — back + title + trailing actions"
+
+# ─── FIGMA IMPLEMENTATION ──────────────────────────────────────────────────────
+
+figma_implementation:
+  profile_hero_card: >
+    The Profile Hero Card component (key: b0d11e1a3149c1b5478070e2e2ac6979eaa9e9d8, nodeId: 87:97036)
+    has 4 variants: Light, Dark, Cover, Coral. Each combines cover image + info card
+    with proper overlapping built in. USE THIS instead of building cover+info manually.
+    After instantiation, detach to customize content.
+
+  photo_grid: >
+    Create a frame (HORIZONTAL layout, gap=8, wrap) for the photo grid.
+    Each photo: frame (r16, clipsContent, IMAGE fill from HaHo).
+    Mix sizes: some full-width, some half-width, for visual interest.
+    Copy different images from various HaHo screens for variety.
+
+  avatar_stack: >
+    For mutual friends: create a horizontal frame with negative gap (-8px).
+    4-5 small DSAvatar instances (32px, circle, with different HaHo portrait images).
+    Last item: dark pill (surfacePrimary120, r360) with "+26" white text.
+
+  content_principles: >
+    Profile content should reflect the app's purpose:
+    - Social app: photos, followers, following counts
+    - Fitness app: workouts, achievements, progress
+    - Travel app: destinations, stories, reviews
+    - Creative app: portfolio, projects, skills
+    Adapt stats labels and content types to the specific app.
