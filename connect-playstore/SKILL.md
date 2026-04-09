@@ -307,7 +307,7 @@ pip3 install -r scripts/requirements-playstore.txt
 3. **Grant access** in Play Console > Setup > API access
 4. **Save credentials** to:
    ```
-   /Users/omardoucoure/Documents/OmApps/credentials/play-store-service-account.json
+   $CREDENTIALS_DIR/play-store-service-account.json
    ```
 
 See `/Users/omardoucoure/Documents/OmApps/scripts/PLAYSTORE_SETUP.md` for detailed instructions.
@@ -411,7 +411,7 @@ For crash reports:
 ## Error Handling
 
 **"Service account key not found"**
-- Check `/Users/omardoucoure/Documents/OmApps/credentials/play-store-service-account.json`
+- Check `$CREDENTIALS_DIR/play-store-service-account.json`
 - Ensure service account JSON is in correct location
 
 **"Package not found"**

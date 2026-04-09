@@ -67,7 +67,7 @@ grep -A 1 "PRODUCT_BUNDLE_IDENTIFIER" *.xcodeproj/project.pbxproj | grep "=" | c
 ```
 
 **Team ID:**
-`FD4Q5PUHPM` (use for all projects)
+`YOUR_TEAM_ID` (use for all projects)
 
 ### Step 4: Generate App Icons (if missing)
 
@@ -236,7 +236,7 @@ This tells Apple that your app does NOT use custom encryption algorithms and onl
     <key>destination</key>
     <string>upload</string>
     <key>teamID</key>
-    <string>FD4Q5PUHPM</string>
+    <string>YOUR_TEAM_ID</string>
     <key>signingStyle</key>
     <string>automatic</string>
     <key>uploadSymbols</key>
@@ -338,13 +338,13 @@ Assets.xcassets is not in Xcode project. Follow Step 5 to add it.
 
 ## Credentials and Configuration
 
-**Team ID:** FD4Q5PUHPM
-**API Key:** AuthKey_52Q2P8DHLU.p8
-**Key ID:** 52Q2P8DHLU
+**Team ID:** YOUR_TEAM_ID
+**API Key:** AuthKey_YOUR_KEY_ID.p8
+**Key ID:** YOUR_KEY_ID
 **Issuer ID:** 382a7b25-765f-4e15-ba75-5a7575276772
 
 **API Key Location:**
-- `/Users/omardoucoure/Documents/OmApps/credentials/AuthKey_52Q2P8DHLU.p8`
+- `$CREDENTIALS_DIR/AuthKey_YOUR_KEY_ID.p8`
 
 ## Automation Workflow Summary
 

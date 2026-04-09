@@ -17,16 +17,16 @@ Always use the script — never use browser automation for Pinterest.
 
 **Path:** `/Users/omardoucoure/Documents/OmApps/scripts/pinterest_connect.py`
 **Run from:** `/Users/omardoucoure/Documents/OmApps`
-**Token:** Stored at `/Users/omardoucoure/Documents/OmApps/credentials/pinterest_token.txt`
+**Token:** Stored at `$CREDENTIALS_DIR/pinterest_token.txt`
 
 ## Known Board IDs
 
 | Board | ID | Pins |
 |---|---|---|
-| Cuisinedecheznous (main) | `709528184982947948` | ~3,167 |
-| Social | `709528184983979182` | 4 |
+| Cuisinedecheznous (main) | `YOUR_BOARD_ID` | ~3,167 |
+| Social | `YOUR_BOARD_ID` | 4 |
 
-**Default board for all new pins:** `709528184982947948` (Cuisinedecheznous)
+**Default board for all new pins:** `YOUR_BOARD_ID` (Cuisinedecheznous)
 
 ## Quick Reference
 
@@ -126,15 +126,15 @@ python3 scripts/pinterest_connect.py top-pins 30 --count 25 --sort-by OUTBOUND_C
 
 ```bash
 # Create themed sections in the main board
-python3 scripts/pinterest_connect.py create-section 709528184982947948 "Poulet"
-python3 scripts/pinterest_connect.py create-section 709528184982947948 "Poisson"
-python3 scripts/pinterest_connect.py create-section 709528184982947948 "Riz et légumes"
-python3 scripts/pinterest_connect.py create-section 709528184982947948 "Desserts"
+python3 scripts/pinterest_connect.py create-section YOUR_BOARD_ID "Poulet"
+python3 scripts/pinterest_connect.py create-section YOUR_BOARD_ID "Poisson"
+python3 scripts/pinterest_connect.py create-section YOUR_BOARD_ID "Riz et légumes"
+python3 scripts/pinterest_connect.py create-section YOUR_BOARD_ID "Desserts"
 
 # Then pin a recipe into a specific section:
 python3 scripts/pinterest_connect.py pin-recipe \
   https://www.cuisinedecheznous.net/blog/... \
-  --board-id 709528184982947948 \
+  --board-id YOUR_BOARD_ID \
   --section-id <section_id>
 ```
 
@@ -219,7 +219,7 @@ Both types appear in feeds and search — REGULAR type drives more outbound clic
 **"Authentication failed"**
 - Token expired or revoked
 - Get a new token from developers.pinterest.com → your app → "Generate access token"
-- Save to `/Users/omardoucoure/Documents/OmApps/credentials/pinterest_token.txt`
+- Save to `$CREDENTIALS_DIR/pinterest_token.txt`
 
 **"Pin not found" (404) on top-pins**
 - Some top pins are saved from other accounts (repins)
@@ -237,7 +237,7 @@ Both types appear in feeds and search — REGULAR type drives more outbound clic
 ## Daily Scheduler (Automated Publishing)
 
 **Script:** `/Users/omardoucoure/Documents/OmApps/scripts/pinterest_scheduler.py`
-**State file:** `/Users/omardoucoure/Documents/OmApps/credentials/pinterest_scheduler_state.json`
+**State file:** `$CREDENTIALS_DIR/pinterest_scheduler_state.json`
 
 ### Commands
 | Task | Command |
@@ -276,5 +276,5 @@ Both types appear in feeds and search — REGULAR type drives more outbound clic
 | Account ID | `709528253702029555` |
 | Type | BUSINESS |
 | Monthly Views | ~835K |
-| Main Board ID | `709528184982947948` |
+| Main Board ID | `YOUR_BOARD_ID` |
 | WordPress API | `https://www.cuisinedecheznous.net/wp-json/wp/v2` |

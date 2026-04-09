@@ -82,12 +82,12 @@ To add a new site, just add the GSC service account as an owner/user in Google S
 
 `~/.claude/skills/audit-seo/scripts/audit-seo.js`
 
-Credentials are stored in `~/.claude/skills/audit-seo/credentials/*.json` (service account JSON files). To add a new GSC account, drop a JSON file there. Alternatively, set `GSC_CREDENTIALS_JSON` env var (JSON or base64-encoded) for portable use without files.
+Credentials are stored in `$CREDENTIALS_DIR/*.json` (service account JSON files). To add a new GSC account, drop a JSON file there. Alternatively, set `GSC_CREDENTIALS_JSON` env var (JSON or base64-encoded) for portable use without files.
 
 ## Troubleshooting
 
 ### No sites discovered
-- Ensure at least one valid service account JSON file exists in `~/.claude/skills/audit-seo/credentials/`
+- Ensure at least one valid service account JSON file exists in `$CREDENTIALS_DIR/`
 - Or set `GSC_CREDENTIALS_JSON` env var with the service account JSON
 - Run `--list-sites` to debug which credentials are working
 - The service account email must be added as a user/owner in GSC for each property

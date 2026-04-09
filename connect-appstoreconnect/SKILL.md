@@ -232,7 +232,7 @@ python3 scripts/appstore_connect.py build-info <build_id>
 #### Enable Analytics Permission:
 1. Log into [App Store Connect](https://appstoreconnect.apple.com)
 2. Go to **Users and Access > Keys**
-3. Edit your API key (52Q2P8DHLU)
+3. Edit your API key (YOUR_KEY_ID)
 4. Enable **"App Analytics"** role
 5. Save changes
 
@@ -452,9 +452,9 @@ Use these preset groups with `upload-screenshots`:
 - Check current state with `status` command
 - Create new version if needed
 
-**"Could not find AuthKey_52Q2P8DHLU.p8"**
+**"Could not find AuthKey_YOUR_KEY_ID.p8"**
 - Key missing from expected locations
-- Check `/Users/omardoucoure/Documents/OmApps/credentials/`
+- Check `$CREDENTIALS_DIR/`
 
 **"Locale not found"**
 - Locale doesn't exist for this version
